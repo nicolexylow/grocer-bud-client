@@ -6,12 +6,8 @@ const NavBar = () => {
     const testEnd = 'hello'
     return (
         <div>
-            <NavLink to='/'>
-                Home
-            </NavLink>
-
             <NavLink to='/categories'>
-                Categories
+                Home
             </NavLink>
 
             <NavLink to='/grocery-list'>
