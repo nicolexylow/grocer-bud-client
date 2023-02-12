@@ -18,6 +18,8 @@ const NavBar = () => {
             });
         }
     
+
+    const testEnd = 'hello'
     return (
         <div>
             <NavLink to='/'>
@@ -47,6 +49,13 @@ const NavBar = () => {
             <button onClick={handleLogout}>
                 Logout
             </button>
+            <NavLink to='/stores'>
+                Stores
+            </NavLink>
+
+            <NavLink to={'/categories/' + testEnd}>
+                Items
+            </NavLink>
         </div>
     )
 }

@@ -7,8 +7,13 @@ import GroceryList from './groceryList/GroceryList';
 import Signup from './pages/Signup'
 import { Login } from './pages/Login'
 import About from './pages/About'
+import Stores from './stores/Stores';
+import Items from './items/Items';
 
 function App() {
+
+  const testEnd = 'hello'
+
   return (
     <div className="App">
       <AuthProvider>
@@ -20,6 +25,10 @@ function App() {
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/signup' element={<Signup />} />
           <Route exact path='/login' element={<Login />} />
+          <Route exact path='/categories' element={<Categories />} />
+          <Route exact path='/grocery-list' element={<GroceryList />} />
+          <Route exact path='/stores' element={<Stores />} />
+          <Route exact path={'/categories/' + testEnd} element={<Items />} />
         </Routes>
       </Router>
       </AuthProvider>
