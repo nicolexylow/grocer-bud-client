@@ -1,13 +1,15 @@
-import React from 'react'
-import NavBar from '../NavBar'
+import React from 'react';
+import CategoryItem from '../categories/CategoryItem';
 
-const Categories = () => {
-    return (
-        <div>
-            <NavBar />
-            Hello from the categories page
-        </div>
-    )
-}
+const Categories = ({ categories }) => {
+  return (
+    <div>
+      {categories.map((category, index) => (
+        <CategoryItem key={index} category={category} />
+      ))}
+    </div>
+  );
+};
 
-export default Categories
+export default Categories;
+
