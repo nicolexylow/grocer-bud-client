@@ -3,7 +3,7 @@ import NavBar from '../NavBar'
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { signInWithGoogle } from '../../config/firebase';
-import {  signInWithEmailAndPassword   } from 'firebase/auth';
+import {  signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup   } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 
 
@@ -12,6 +12,9 @@ export const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [loading, setLoading] = useState(false)
+    const provider = new GoogleAuthProvider();
 
     const onLogin = (e) => {
         e.preventDefault();
@@ -23,15 +26,20 @@ export const Login = () => {
             console.log(user);
         })
         .catch((error) => {
-            const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorCode, errorMessage)
+            setErrorMessage(errorMessage);
         });
-
     }
 
+    const signInWithGoogle = async () => {
+        try {
+          await signInWithPopup(auth, provider);
+          navigate("/categories");
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
-  
     return (
         <div>
         <div>
@@ -40,6 +48,7 @@ export const Login = () => {
             <h2>
               Login to your account
             </h2>
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
           </div>
           <form>
             <div>

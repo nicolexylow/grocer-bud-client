@@ -29,13 +29,12 @@ function App() {
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/signup' element={<Signup />} />
           <Route exact path='/login' element={<Login />} />
-          <Route exact path='/categories' element={<Categories />} />
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/stores' element={<Stores />} />
-          {/* <Route exact path={'/categories' + '/' + testEnd} element={<Items />} />
-          <Route exact path={'/categories/' + testEnd} element={<Items />} />
+          {/* <Route exact path={'/categories' + '/' + testEnd} element={<Items />} /> */}
+          {/* <Route exact path={'/categories/' + testEnd} element={<Items />} /> */}
           <Route path='/items' element={<Items />} />
-          <Route path='/AddItemForm' element={<AddItemForm />} /> */}
+          {/* <Route path='/AddItemForm' element={<AddItemForm />} /> */}
         </Routes>
       </Router>
       </AuthProvider>
