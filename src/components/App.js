@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { AuthProvider } from '../contexts/AuthContext';
 import Home from './home/Home';
-import SignUp from './signUp/SignUp';
-import LogIn from './login/LogIn';
+import Signup from './pages/Signup'
+import { Login } from './pages/Login'
+import About from './pages/About'
 import Categories from './categories/Categories';
 import GroceryList from './groceryList/GroceryList';
 import Stores from './stores/Stores';
@@ -24,12 +26,11 @@ function App() {
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/signup' element={<Signup />} />
           <Route exact path='/login' element={<Login />} />
-          <Route exact path='/categories' element={<Categories />} />
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/stores' element={<Stores />} />
-          <Route exact path={'/categories/' + testEnd} element={<Items />} />
+          {/* <Route exact path={'/categories/' + testEnd} element={<Items />} /> */}
           <Route path='/items' element={<Items />} />
-          <Route path='/AddItemForm' element={<AddItemForm />} />
+          {/* <Route path='/AddItemForm' element={<AddItemForm />} /> */}
         </Routes>
       </Router>
       </AuthProvider>
