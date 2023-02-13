@@ -1,11 +1,7 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { signOut } from "firebase/auth";
-import { auth } from '../config/firebase';
-import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
-    
+
         const navigate = useNavigate();
      
         const handleLogout = () => {               
@@ -24,19 +20,14 @@ const NavBar = () => {
             } 
             return console.log(auth.currentUser)
         }
-    
 
     const testEnd = 'hello'
     return (
         <div>
-            <NavLink to='/categories'>
+            <NavLink to='/'>
                 Home
             </NavLink>
-
-            <NavLink to='/about'>
-                About
-            </NavLink>
-
+            
             <NavLink to='/grocery-list'>
                 Grocery List
             </NavLink>
@@ -49,7 +40,6 @@ const NavBar = () => {
                 Sign Up
             </NavLink>
 
-            
             <NavLink to='/stores'>
                 Stores
             </NavLink>
