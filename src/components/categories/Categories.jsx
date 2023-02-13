@@ -6,7 +6,6 @@ const Categories = () => {
     return (
         <div>
             <NavBar />
-            Hello from the categories page
             <AddCategory />
         </div>
     )
