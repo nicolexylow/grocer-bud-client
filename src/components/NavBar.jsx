@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
 
 const NavBar = () => {
-
+    const [email, setName] = useState('');
         const navigate = useNavigate();
+        const [user, setUser] = useState(null);
      
         const handleLogout = () => {               
             signOut(auth).then(() => {
@@ -24,22 +25,29 @@ const NavBar = () => {
                 if (user) {
                   // User is signed in, see docs for a list of available properties
                   // https://firebase.google.com/docs/reference/js/firebase.User
-                  const uid = user.uid;
+                  const displayName = user.displayName;
                   const email = user.email;
                   // ...
-                  console.log("uid", uid)
+                  console.log("name", displayName)
                   console.log('email', email)
+                  setName(user.displayName);
 
                 } else {
                   // User is signed out
                   // ...
                   console.log("user is logged out")
+                  setName('');
                 }
               });
-             
         }, [])
+          
+            useEffect(() => {
+              const unsubscribe = auth.onAuthStateChanged((user) => {
+                setUser(user);
+              });
+              return () => unsubscribe();
+            }, []);
 
-    const testEnd = 'hello'
     return (
         <div>
             <NavLink to='/'>
@@ -61,20 +69,21 @@ const NavBar = () => {
             <NavLink to={'/items/'}>
                 Items
             </NavLink>
-
-            <NavLink to='/login'>
-                Login
-            </NavLink>
-
-            <NavLink to='/signup'>
-                Sign Up
-            </NavLink>
-            
-            <button onClick={handleLogout}>
-                Logout
-            </button>
+            {user ? ('') : (<NavLink to='/login'>
+                    Login
+                </NavLink>)} 
+            {user ? ('') : (<NavLink to='/signup'>
+                    Sign Up
+                </NavLink>)} 
+            {user ? (
+                <button onClick={handleLogout}>Sign Out</button>
+                    ) : (
+                    ''
+                    )}
                 
-
+            <p>
+                {email ? `Welcome ${email}` : 'You are not logged in.'}
+            </p>
 
         </div>
     )

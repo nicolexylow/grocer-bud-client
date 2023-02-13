@@ -4,7 +4,6 @@ import AddCategory from './AddCategory'
 import { auth } from '../../config/firebase';
 import { onAuthStateChanged } from "firebase/auth";
 
-
 const Categories = () => {
 
     useEffect(()=>{
@@ -27,10 +26,10 @@ const Categories = () => {
     return (
         <div>
             <NavBar />
+            <AddCategory />
             Hello from the categories page
         </div>
     )
 }
-
 
 export default Categories
