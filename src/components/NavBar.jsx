@@ -17,6 +17,13 @@ const NavBar = () => {
             // An error happened.
             });
         }
+
+        const handleUser = (auth) => {
+            if (auth.currentUser == null) {
+                return console.log(' no user ')
+            } 
+            return console.log(auth.currentUser)
+        }
     
 
     const testEnd = 'hello'
@@ -42,9 +49,7 @@ const NavBar = () => {
                 Sign Up
             </NavLink>
 
-            <button onClick={handleLogout}>
-                Logout
-            </button>
+            
             <NavLink to='/stores'>
                 Stores
             </NavLink>
@@ -52,6 +57,11 @@ const NavBar = () => {
             <NavLink to={'/categories/' + testEnd}>
                 Items
             </NavLink>
+            <button onClick={handleLogout}>
+                            Logout
+                        </button>
+                
+            <button onClick={handleUser}>user</button>
         </div>
     )
 }

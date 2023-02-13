@@ -6,6 +6,7 @@ const GroceryList = () => {
         <div>
             <NavBar />
             Hello from the grocery list page
+            
         </div>
     )
 }
