@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import NavBar from "../NavBar";
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from '../../config/firebase'
 
 
 const CategoriesForm = () => {
     const [data, setData] = useState('')
+    const [name, setName] = useState('')
+    const [imageURL, setImageURL] = useState('')
 
     const fetchData = async() => {
         const response = await axios.get('http://numbersapi.com/random/trivia')
@@ -16,16 +20,25 @@ const CategoriesForm = () => {
         fetchData()
     }, [])
 
+
     const handleSubmit = (event) => {
         event.preventDefault()
-
-        // send to database
+        sendData()
+        navigate('/categories')
     }
 
     const navigate = useNavigate()
     const handleCancel = () => {
         navigate('/categories')
     }
+
+    const sendData = async () => {
+        const docRef = await addDoc(collection(db, "categories"), {
+            name: name,
+            imageURL: imageURL
+        })
+    }
+    
 
     return (
         <div>   
@@ -36,12 +49,12 @@ const CategoriesForm = () => {
             <form onSubmit={handleSubmit}>
                 <label>
                     Name
-                    <input />
+                    <input required onChange={(event) => {setName(event.target.value)}}/>
                 </label>
 
                 <label>
                     Image URL
-                    <input />
+                    <input required onChange={(event) => {setImageURL(event.target.value)}}/>
                 </label>
 
                 <button>Create Category</button>
