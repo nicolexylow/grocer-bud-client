@@ -1,11 +1,7 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { signOut } from "firebase/auth";
-import { auth } from '../config/firebase';
-import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
-    
+
         const navigate = useNavigate();
      
         const handleLogout = () => {               
@@ -17,19 +13,21 @@ const NavBar = () => {
             // An error happened.
             });
         }
-    
+
+        const handleUser = (auth) => {
+            if (auth.currentUser == null) {
+                return console.log(' no user ')
+            } 
+            return console.log(auth.currentUser)
+        }
 
     const testEnd = 'hello'
     return (
         <div>
-            <NavLink to='/categories'>
+            <NavLink to='/'>
                 Home
             </NavLink>
-
-            <NavLink to='/about'>
-                About
-            </NavLink>
-
+            
             <NavLink to='/grocery-list'>
                 Grocery List
             </NavLink>
@@ -42,9 +40,6 @@ const NavBar = () => {
                 Sign Up
             </NavLink>
 
-            <button onClick={handleLogout}>
-                Logout
-            </button>
             <NavLink to='/stores'>
                 Stores
             </NavLink>
@@ -52,6 +47,11 @@ const NavBar = () => {
             <NavLink to={'/categories/' + testEnd}>
                 Items
             </NavLink>
+            <button onClick={handleLogout}>
+                            Logout
+                        </button>
+                
+            <button onClick={handleUser}>user</button>
         </div>
     )
 }
