@@ -1,4 +1,9 @@
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import { signOut } from "firebase/auth";
+import { auth } from '../config/firebase';
+import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from "firebase/auth";
 
 const NavBar = () => {
 

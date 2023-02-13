@@ -1,22 +1,8 @@
-// import React, { useState, useEffect } from 'react';
-// import CategoryItem from '../categories/CategoryItem';
-// import AddCategory from './AddCategory'
-
-// const Categories = ({ categories }) => {
-//   return (
-//     <div>
-//       {categories.map((category, index) => (
-//         <CategoryItem key={index} category={category} />
-//       ))}
-//             <AddCategory />
-//     </div>
-//   );
-// };
-
-// export default Categories;
 import { auth } from '../../config/firebase';
 import { onAuthStateChanged } from "firebase/auth";
-
+import React, { useEffect } from 'react';
+import NavBar from '../NavBar';
+import AddCategory from './AddCategory';
 
 const Categories = () => {
 
@@ -45,5 +31,7 @@ const Categories = () => {
         </div>
     )
 }
+
+export default Categories
 
 
