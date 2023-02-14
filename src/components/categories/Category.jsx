@@ -28,10 +28,6 @@ const Category = () => {
             <div>
                 Nothing expired
             </div>
-{/* 
-            {categories ? categories.map((category, index) => {
-                <p>{category[index].name}</p>
-            }) : null} */}
             
             {categories.map((category, i) => {
                 return <p key={i}>{category.name}</p>
@@ -42,3 +38,5 @@ const Category = () => {
 }
 
 export default Category
+
+loading, isloading
