@@ -11,15 +11,6 @@ const CategoriesForm = () => {
     const [name, setName] = useState('')
     const [imageURL, setImageURL] = useState('')
 
-    const fetchData = async() => {
-        const response = await axios.get('http://numbersapi.com/random/trivia')
-        setData(response.data)
-    }
-
-    useEffect(() => {
-        fetchData()
-    }, [])
-
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -43,7 +34,6 @@ const CategoriesForm = () => {
     return (
         <div>   
             <NavBar />
-            <div>{data}</div>
             <h1>NEW CATEGORY</h1>
 
             <form onSubmit={handleSubmit}>

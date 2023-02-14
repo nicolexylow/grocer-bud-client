@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, doc, setDoc, getDocs } from "firebase/firestore"; 
 import { db } from '../../config/firebase'
+import { useNavigate } from 'react-router-dom'
 
 const Category = () => {
     const [categories, setCategories] = useState([])
@@ -15,6 +16,11 @@ const Category = () => {
         setCategories(arr)
     }
 
+    const navigate = useNavigate()
+    const handleClick = () => {
+        navigate('/categories')
+    }
+
     useEffect(() => {
         fetchData();
     }, [])
@@ -26,7 +32,7 @@ const Category = () => {
     return (
         <div>
             {categories.map((category, i) => {
-                return <div key={i}>{category.name}</div>
+                return <button type='button' className="btn btn-info mb-4 w-75 py-5" onClick={handleClick} key={i}>{category.name}</button>
             })}
         </div>
     )

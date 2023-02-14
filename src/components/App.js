@@ -31,9 +31,9 @@ function App() {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/stores' element={<Stores />} />
-          {/* <Route exact path={'/categories' + '/' + testEnd} element={<Items />} /> */}
+          <Route exact path={'/categories' + '/' + testEnd} element={<Items />} />
           {/* <Route exact path={'/categories/' + testEnd} element={<Items />} /> */}
-          <Route path='/items' element={<Items />} />
+          {/* <Route path='/items' element={<Items />} /> */}
           {/* <Route path='/AddItemForm' element={<AddItemForm />} /> */}
         </Routes>
       </Router>

@@ -16,7 +16,7 @@ const AddCategory = () => {
 
     return (
         <div>
-            <button onClick={handleClick}>Add a category</button>
+            <button className='btn btn-info mb-3' onClick={handleClick}>Add a category</button>
 
             <div className='categories-container'>
                 <Category />
