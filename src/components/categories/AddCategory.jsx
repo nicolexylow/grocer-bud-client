@@ -40,17 +40,13 @@ const AddCategory = () => {
 
 
     return (
-        <div className="App">
-          <form onSubmit={handleSubmit} className='form'>
-            <input type='file' />
-            <button type='submit'>Upload</button>
-          </form>
-          {
-            !imgUrl &&
-            <div className='outerbar'>
-              <div className='innerbar' style={{ width: `${progresspercent}%` }}>{progresspercent}%</div>
+        <div>
+            <button className='btn btn-info mb-3' onClick={handleClick}>Add a category</button>
+
+            <div className='categories-container'>
+                <Category />
             </div>
-          }
+          
           {
             imgUrl &&
             <img src={imgUrl} alt='uploaded file' height={200} />

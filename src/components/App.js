@@ -13,6 +13,7 @@ import Items from './items/Items';
 import AddItemForm from './items/AddItemForm'
 
 
+
 function App() {
 
   const testEnd = 'hello'
@@ -31,10 +32,11 @@ function App() {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/stores' element={<Stores />} />
-          {/* <Route exact path={'/categories' + '/' + testEnd} element={<Items />} /> */}
-          {/* <Route exact path={'/categories/' + testEnd} element={<Items />} /> */}
+          <Route exact path={'/categories' + '/' + testEnd} element={<Items />} />
+          <Route exact path={'/categories/' + testEnd} element={<Items />} />
           <Route path='/items' element={<Items />} />
-          {/* <Route path='/AddItemForm' element={<AddItemForm />} /> */}
+          <Route path='/AddItemForm' element={<AddItemForm />} />
+          {/* /categories/:categoryId/add-item need something like this not sure how */}
         </Routes>
       </Router>
       </AuthProvider>

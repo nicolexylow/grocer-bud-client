@@ -11,7 +11,6 @@ const Categories = () => {
         <div>
             <NavBar />
             <AddCategory />
-            Hello from the categories page
         </div>
     )
 }

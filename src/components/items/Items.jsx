@@ -5,11 +5,11 @@ import NavBar from '../NavBar';
 function Items() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const [itemAdded, setItemAdded] = useState(false);
 
   useEffect(() => {
-    // Fetch products from API only when the component is mounted for the first time
-    if (!isMounted) {
+    // Fetch products from API only when an item has been added
+    if (itemAdded) {
       fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=&search_countries=&json=1`)
         .then(response => {
           if (!response.ok) {
@@ -26,10 +26,12 @@ function Items() {
         .catch(error => {
           setError(error.message);
         });
-
-      setIsMounted(true);
     }
-  }, [isMounted]);
+  }, [itemAdded]);
+
+  const handleItemAdded = () => {
+    setItemAdded(true);
+  }
 
   if (error) {
     return <div>{error}</div>;
@@ -62,7 +64,7 @@ function Items() {
         <div>No items found. Please add a new item.</div>
       )}
       <Link to="/AddItemForm">
-        <button>Add Item</button>
+        <button onClick={handleItemAdded}>Add Item</button>
       </Link>
     </div>
   );
@@ -70,3 +72,79 @@ function Items() {
 
 export default Items;
 
+
+// import React, { useState, useEffect } from 'react';
+// import { Link } from 'react-router-dom';
+// import NavBar from '../NavBar';
+// import { db } from '../../config/firebase';
+// import { collection, addDoc } from "firebase/firestore"; 
+
+// function Items() {
+//   const [products, setProducts] = useState([]);
+//   const [error, setError] = useState(null);
+
+//   useEffect(() => {
+//     // Initialize Firebase with your project credentials
+//     firebase.initializeApp({
+//       // your Firebase project credentials
+//     });
+
+//     // Create a reference to the Firebase collection that stores items
+//     // const itemsRef = firebase.firestore().collection('breakfast foods');
+//     const itemsRef =  getDocs(collection(db, "breakfast foods"));
+//     // Listen for changes to the items in the collection
+//     const unsubscribe = itemsRef.onSnapshot((snapshot) => {
+//       const newProducts = snapshot.docs.map((doc) => ({
+//         id: doc.id,
+//         ...doc.data(),
+//       }));
+//       setProducts(newProducts);
+//     });
+
+//     // Unsubscribe from the listener when the component unmounts
+//     return unsubscribe;
+//   }, []);
+
+//   const handleItemAdded = () => {
+//     // Create a new item and add it to the Firebase collection
+//     firebase.firestore().collection('breakfast foods').add({
+//       // the data for the new item
+//     });
+//   };
+
+//   if (error) {
+//     return <div>{error}</div>;
+//   }
+
+//   return (
+//     <div>
+//       <NavBar />
+//       <h1>Items Page</h1>
+//       {products.length > 0 ? (
+//         <ul>
+//           {products.map((product) => (
+//             <li key={product.id}>
+//               <Link to={`/item/${product.id}`}>
+//                 <h2>{product.product_name}</h2>
+//                 <img src={product.image_url} alt={product.product_name} />
+//                 <p>Nutrition facts:</p>
+//                 <ul>
+//                   <li>Calories: {product.calories}</li>
+//                   <li>Protein: {product.protein} g</li>
+//                   <li>Fat: {product.fat} g</li>
+//                   <li>Carbohydrates: {product.carbohydrates} g</li>
+//                   <li>Nutrition Grade: {product.nutrition_grade}</li>
+//                 </ul>
+//               </Link>
+//             </li>
+//           ))}
+//         </ul>
+//       ) : (
+//         <div>No items found. Please add a new item.</div>
+//       )}
+//       <button onClick={handleItemAdded}>Add Item</button>
+//     </div>
+//   );
+// }
+
+// export default Items;
