@@ -1,8 +1,10 @@
+import React, { useState, useEffect } from 'react'
+import NavBar from '../NavBar'
+import AddCategory from './AddCategory'
 import { auth } from '../../config/firebase';
 import { onAuthStateChanged } from "firebase/auth";
 import React, {useEffect} from 'react'
 import NavBar from '../NavBar';
-
 
 const Categories = () => {
 
@@ -26,9 +28,9 @@ const Categories = () => {
     return (
         <div>
             <NavBar />
-            Hello from the categories page
+            <AddCategory />
         </div>
     )
 }
-export default Categories;
 
+export default Categories

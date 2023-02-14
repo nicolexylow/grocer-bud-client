@@ -3,37 +3,37 @@ import NavBar from '../NavBar';
 // import { storage } from 'firebase/app';
 // import 'firebase/storage';
 
-const AddItemForm = ({ onAddItem }) => {
-  const [productName, setProductName] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
-  const [image, setImage] = useState(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+// const AddItemForm = ({ onAddItem }) => {
+//   const [productName, setProductName] = useState('');
+//   const [expiryDate, setExpiryDate] = useState('');
+//   const [image, setImage] = useState(null);
+//   const [error, setError] = useState(false);
+//   const [loading, setLoading] = useState(false);
 
-  const handleProductNameChange = (event) => {
-    setProductName(event.target.value);
-  };
+//   const handleProductNameChange = (event) => {
+//     setProductName(event.target.value);
+//   };
 
-  const handleExpiryDateChange = (event) => {
-    setExpiryDate(event.target.value);
-  };
+//   const handleExpiryDateChange = (event) => {
+//     setExpiryDate(event.target.value);
+//   };
 
-  const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
-  };
+//   const handleImageChange = (event) => {
+//     setImage(event.target.files[0]);
+//   };
 
 // const storageRef = storage().ref(); // Initialize storageRef with a reference to Firebase Storage
 
 const handleSubmit = (event) => {
   event.preventDefault();
 
-  // If an error has already occurred or the request is loading, don't make another request
-  if (error || loading) {
-    return;
-  }
+//   // If an error has already occurred or the request is loading, don't make another request
+//   if (error || loading) {
+//     return;
+//   }
 
-  // Start loading
-  setLoading(true);
+//   // Start loading
+//   setLoading(true);
 
   // Upload image to Firebase Storage if storageRef is defined
   // let uploadTask;
@@ -57,7 +57,7 @@ const handleSubmit = (event) => {
       console.log(nutritionFacts)
       const nutritionScore = product.nutrition_grade_fr;
       console.log(nutritionScore)
-
+    })
       // If there is an upload task, get the download URL and pass it to onAddItem
       // if (uploadTask) {
       //   uploadTask.snapshot.ref.getDownloadURL()
@@ -104,14 +104,14 @@ const handleSubmit = (event) => {
       }
       setLoading(false); // Stop loading
 
-      setError(false); // Reset error state on successful request
-    })
-    .catch(error => {
-      console.error('Error adding item:', error);
-      setError(true); // Set error state to true
-      setLoading(false); // Stop loading
-    });
-};
+//       setError(false); // Reset error state on successful request
+//     })
+//     .catch(error => {
+//       console.error('Error adding item:', error);
+//       setError(true); // Set error state to true
+//       setLoading(false); // Stop loading
+//     });
+// };
 
   return (
     <div>
@@ -142,5 +142,4 @@ const handleSubmit = (event) => {
     </div>
   );
 };
-
 export default AddItemForm;
