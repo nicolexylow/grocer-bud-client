@@ -13,6 +13,7 @@ import Items from './items/Items';
 import AddItemForm from './items/AddItemForm'
 
 
+
 function App() {
   const [categories, setCategories] = useState([])
   
@@ -38,9 +39,9 @@ function App() {
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/stores' element={<Stores />} />
           <Route path={'/categories/:name'} element={<Items />} />
-          {/* <Route exact path={'/categories/' + testEnd} element={<Items />} /> */}
-          {/* <Route path='/items' element={<Items />} /> */}
-          {/* <Route path='/AddItemForm' element={<AddItemForm />} /> */}
+          <Route exact path={'/categories/' + testEnd} element={<Items />} />
+          <Route path='/items' element={<Items />} />
+          <Route path='/AddItemForm' element={<AddItemForm />} />
         </Routes>
       </Router>
       </AuthProvider>

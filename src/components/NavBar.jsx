@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
 
 const NavBar = () => {
-    const [email, setName] = useState('');
+    const [name, setName] = useState('');
+    const [uid, setUid] = useState('');
         const navigate = useNavigate();
         const [user, setUser] = useState(null);
      
@@ -23,18 +24,13 @@ const NavBar = () => {
         useEffect(()=>{
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                  // User is signed in, see docs for a list of available properties
-                  // https://firebase.google.com/docs/reference/js/firebase.User
                   const displayName = user.displayName;
                   const email = user.email;
-                  // ...
-                  console.log("name", displayName)
-                  console.log('email', email)
+                  const uid = user.uid;
                   setName(user.displayName);
+                  setUid(user.uid)
 
                 } else {
-                  // User is signed out
-                  // ...
                   console.log("user is logged out")
                   setName('');
                 }
@@ -44,6 +40,8 @@ const NavBar = () => {
             useEffect(() => {
               const unsubscribe = auth.onAuthStateChanged((user) => {
                 setUser(user);
+                console.log(user)
+                console.log(auth.uid)
               });
               return () => unsubscribe();
             }, []);
@@ -82,7 +80,8 @@ const NavBar = () => {
                     )}
                 
             <p>
-                {email ? `Welcome ${email}` : 'You are not logged in.'}
+                {name ? `Welcome ${name}` : 'You are not logged in.'}
+                {uid ? `Welcome ${uid}` : 'You are not logged in.'}
             </p>
 
         </div>

@@ -38,3 +38,5 @@ const Category = () => {
 }
 
 export default Category
+
+loading, isloading
