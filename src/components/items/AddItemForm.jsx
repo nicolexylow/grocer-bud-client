@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../config/firebase";
+import { db, storage } from "../../config/firebase";
 
 const AddItemForm = () => {
   const navigate = useNavigate();
