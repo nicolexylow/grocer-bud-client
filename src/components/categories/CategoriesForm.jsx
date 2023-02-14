@@ -29,7 +29,6 @@ const CategoriesForm = () => {
             imageURL: imageURL
         })
     }
-    
 
     return (
         <div>   
