@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import NavBar from '../NavBar';
 
-function Items() {
+function Items(props) {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
+
+  const params = useParams() 
+  console.log(params)
 
   useEffect(() => {
     // Fetch products from API only when the component is mounted for the first time

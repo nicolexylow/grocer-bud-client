@@ -62,7 +62,7 @@ const NavBar = () => {
                 Stores
             </NavLink>
 
-            <NavLink to={'/categories/'}>
+            <NavLink to={'/categories'}>
                 Categories
             </NavLink>
 

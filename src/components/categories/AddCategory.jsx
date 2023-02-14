@@ -10,10 +10,6 @@ const AddCategory = () => {
         navigate('/categories/new')
     }
 
-    const fetchUserName = () => {
-
-    }
-
     return (
         <div>
             <button className='btn btn-info mb-3' onClick={handleClick}>Add a category</button>
