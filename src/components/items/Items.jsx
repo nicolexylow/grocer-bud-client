@@ -5,11 +5,11 @@ import NavBar from '../NavBar';
 function Items() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const [itemAdded, setItemAdded] = useState(false);
 
   useEffect(() => {
-    // Fetch products from API only when the component is mounted for the first time
-    if (!isMounted) {
+    // Fetch products from API only when an item has been added
+    if (itemAdded) {
       fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=&search_countries=&json=1`)
         .then(response => {
           if (!response.ok) {
@@ -26,10 +26,12 @@ function Items() {
         .catch(error => {
           setError(error.message);
         });
-
-      setIsMounted(true);
     }
-  }, [isMounted]);
+  }, [itemAdded]);
+
+  const handleItemAdded = () => {
+    setItemAdded(true);
+  }
 
   if (error) {
     return <div>{error}</div>;
@@ -62,11 +64,12 @@ function Items() {
         <div>No items found. Please add a new item.</div>
       )}
       <Link to="/AddItemForm">
-        <button>Add Item</button>
+        <button onClick={handleItemAdded}>Add Item</button>
       </Link>
     </div>
   );
 }
 
 export default Items;
+
 
