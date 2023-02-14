@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
 import Category from './Category';
 
-const AddCategory = () => {
+const AddCategory = (props) => {
 
     const navigate = useNavigate()
 
@@ -15,7 +15,7 @@ const AddCategory = () => {
             <button className='btn btn-info mb-3' onClick={handleClick}>Add a category</button>
 
             <div className='categories-container'>
-                <Category />
+                <Category arr={props.arr}/>
             </div>
         </div>
     )

@@ -4,7 +4,7 @@ import AddCategory from './AddCategory'
 import { auth } from '../../config/firebase';
 import { onAuthStateChanged } from "firebase/auth";
 
-const Categories = () => {
+const Categories = (props) => {
 
     useEffect(()=>{
         onAuthStateChanged(auth, (user) => {
@@ -26,7 +26,7 @@ const Categories = () => {
     return (
         <div>
             <NavBar />
-            <AddCategory />
+            <AddCategory arr={props.arr} />
         </div>
     )
 }

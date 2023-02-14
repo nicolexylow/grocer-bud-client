@@ -16,6 +16,7 @@ const Category = () => {
         setCategories(arr)
     }
 
+
     const navigate = useNavigate()
 
 

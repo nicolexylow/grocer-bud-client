@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import NavBar from "../NavBar";
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import { db } from '../../config/firebase'
 
 
-const CategoriesForm = () => {
+const CategoriesForm = (props) => {
     const [data, setData] = useState('')
     const [name, setName] = useState('')
     const [imageURL, setImageURL] = useState('')
@@ -23,11 +23,23 @@ const CategoriesForm = () => {
         navigate('/categories')
     }
 
-    const sendData = async () => {
-        const docRef = await addDoc(collection(db, "categories"), {
+    const newDoc = async () => {
+        await addDoc(collection(db, "categories"), {
             name: name,
             imageURL: imageURL
         })
+    }
+
+    const sendData = () => {
+        props.add(name)
+
+        const collectionId = name.toLowerCase();
+        const documentId = "default";
+        const value = { versionUsed: '' }; 
+        setDoc(doc(db, collectionId, documentId), value); 
+
+        // create a new doc
+        newDoc()
     }
     
 

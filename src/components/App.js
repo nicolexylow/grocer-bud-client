@@ -14,8 +14,14 @@ import AddItemForm from './items/AddItemForm'
 
 
 function App() {
-
-  const testEnd = 'chicken'
+  const [categories, setCategories] = useState([])
+  
+  const addCategory = (name) => {
+    const arr = categories
+    arr.push(name)
+    setCategories(arr)
+    console.log(categories)
+  }
 
   return (
     <div className="App">
@@ -24,8 +30,8 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route exact path='/about' element={<About />} />
-          <Route exact path='/categories' element={<Categories />} />
-          <Route exact path='/categories/new' element={<CategoriesForm />} />
+          <Route exact path='/categories' element={<Categories arr={categories}/>} />
+          <Route exact path='/categories/new' element={<CategoriesForm add={addCategory}/>} />
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/signup' element={<Signup />} />
           <Route exact path='/login' element={<Login />} />
