@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBar from '../NavBar'
 import { Link } from 'react-router-dom';
+console.log(window.location.pathname)
 const Home = () => {
     return (
         <div>

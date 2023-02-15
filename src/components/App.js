@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from'react';
+import React, { useState } from'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { AuthProvider } from '../contexts/AuthContext';
 import Home from './home/Home';
@@ -15,8 +15,14 @@ import AddItemForm from './items/AddItemForm'
 
 
 function App() {
-
-  const testEnd = 'hello'
+  const [categories, setCategories] = useState([])
+  
+  const addCategory = (name) => {
+    const arr = categories
+    arr.push(name)
+    setCategories(arr)
+    console.log(categories)
+  }
 
   return (
     <div className="App">
@@ -25,18 +31,16 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route exact path='/about' element={<About />} />
-          <Route exact path='/categories' element={<Categories />} />
-          <Route exact path='/categories/new' element={<CategoriesForm />} />
+          <Route exact path='/categories' element={<Categories arr={categories}/>} />
+          <Route exact path='/categories/new' element={<CategoriesForm add={addCategory}/>} />
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/signup' element={<Signup />} />
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/stores' element={<Stores />} />
-          <Route exact path={'/categories' + '/' + testEnd} element={<Items />} />
-          <Route exact path={'/categories/' + testEnd} element={<Items />} />
+          <Route path={'/categories/:name'} element={<Items />} />
           <Route path='/items' element={<Items />} />
           <Route path='/AddItemForm' element={<AddItemForm />} />
-          {/* /categories/:categoryId/add-item need something like this not sure how */}
         </Routes>
       </Router>
       </AuthProvider>

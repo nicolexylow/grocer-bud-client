@@ -40,8 +40,6 @@ const NavBar = () => {
             useEffect(() => {
               const unsubscribe = auth.onAuthStateChanged((user) => {
                 setUser(user);
-                console.log(user)
-                console.log(auth.uid)
               });
               return () => unsubscribe();
             }, []);
@@ -60,7 +58,7 @@ const NavBar = () => {
                 Stores
             </NavLink>
 
-            <NavLink to={'/categories/'}>
+            <NavLink to={'/categories'}>
                 Categories
             </NavLink>
 
