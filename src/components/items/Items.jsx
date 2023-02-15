@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from '../NavBar';
 import { db } from '../../config/firebase';
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import { collection, addDoc, getDocs, docRef } from "firebase/firestore"; 
 
-function Items() {
+export const Items = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [itemAdded, setItemAdded] = useState(false);
@@ -39,6 +39,8 @@ function Items() {
     return <div>{error}</div>;
   }
 
+  get_collection_name()
+
   return (
     <div>
       <NavBar />
@@ -72,4 +74,12 @@ function Items() {
   );
 }
 
-export default Items;
+function get_collection_name() {
+  let str = window.location.pathname
+    str = str.split("/");
+    const collection_name = str[str.length - 1];
+    return collection_name
+}
+const collectionName = get_collection_name();
+
+export { collectionName } 

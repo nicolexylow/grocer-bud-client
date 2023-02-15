@@ -79,7 +79,6 @@ const NavBar = () => {
                 
             <p>
                 {name ? `Welcome ${name}` : 'You are not logged in.'}
-                {uid ? `Welcome ${uid}` : 'You are not logged in.'}
             </p>
 
         </div>

@@ -1,33 +1,36 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
-import { db, storage } from "../../config/firebase";
+import { db, storage, storageRef } from "../../config/firebase";
+import { collectionName } from "./Items";
 
 const AddItemForm = () => {
   const navigate = useNavigate();
+  const { categoryId } = useParams();
   const [productName, setProductName] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
-  const [image, setImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState("");
+  const [image, setImage] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");
 
   const handleImageUpload = (event) => {
-    const image = event.target.files[0];
+    const image = event.target.value;
     setImage(image);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     // Upload image to Firebase Storage
-    if (image !== null) {
-      const storageRef = storage.ref();
-      const imageRef = storageRef.child(image.name);
-      await imageRef.put(image);
-      const url = await imageRef.getDownloadURL();
-      setImageUrl(url);
-    }
+    // if (image !== null) {
+    //   const storageRef = storage.ref();
+    //   const imageRef = storageRef.child(image.name);
+    //   await imageRef.put(image);
+    //   const url = await imageRef.getDownloadURL();
+    //   setImageUrl(url);
+    // }
 
     // Fetch nutrition information
+
     const query = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${productName}&page_size=1&json=true`;
     fetch(query)
       .then((response) => response.json())
@@ -41,18 +44,24 @@ const AddItemForm = () => {
           carbohydrates: product.nutriments.carbohydrates_value,
         };
         const nutritionScore = product.nutrition_grade_fr;
+        
 
-        // Save item to Firebase Firestore
-        const docRef = await addDoc(collection(db, "items"), {
-          name: productName,
-          imageUrl: imageUrl,
-          expiryDate: expiryDate,
-          nutritionFacts: nutritionFacts,
-          nutritionScore: nutritionScore,
-        });
 
+        const sendData = async () => {
+          console.log(collectionName)
+          const docRef = await addDoc(collection(db, collectionName), {
+            name: productName,
+            imageUrl: image,
+            expiryDate: expiryDate,
+            // nutritionFacts: nutritionFacts,
+            // nutritionScore: nutritionScore,
+          });
+          console.log(docRef);
+        };
+
+        sendData();
         // Navigate to items list
-        navigate("/items");
+        navigate(`/categories`);
       })
       .catch((error) => {
         console.error("Error fetching nutrition data:", error);
@@ -60,7 +69,7 @@ const AddItemForm = () => {
   };
 
   const handleCancel = () => {
-    navigate("/items");
+    navigate(`/categories`);
   };
 
   return (
@@ -90,10 +99,10 @@ const AddItemForm = () => {
         <div>
           <label htmlFor="image-upload">Image Upload</label>
           <input
-            type="file"
+            type="text"
             id="image-upload"
             onChange={handleImageUpload}
-            accept="image/*"
+            value={image}
           />
         </div>
         <div>
@@ -108,3 +117,4 @@ const AddItemForm = () => {
 };
 
 export default AddItemForm;
+

@@ -1,4 +1,4 @@
-import React, { useState } from'react';
+import React, { useState, useEffect } from'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { AuthProvider } from '../contexts/AuthContext';
 import Home from './home/Home';
@@ -9,9 +9,8 @@ import Signup from './pages/Signup'
 import { Login } from './pages/Login'
 import About from './pages/About'
 import Stores from './stores/Stores';
-import Items from './items/Items';
+import {Items} from './items/Items';
 import AddItemForm from './items/AddItemForm'
-
 
 
 function App() {
@@ -41,6 +40,7 @@ function App() {
           <Route path={'/categories/:name'} element={<Items />} />
           <Route path='/items' element={<Items />} />
           <Route path='/AddItemForm' element={<AddItemForm />} />
+          <Route path="/categories/:categoryId/items" element={<Items />} />
         </Routes>
       </Router>
       </AuthProvider>
