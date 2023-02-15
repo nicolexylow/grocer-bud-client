@@ -31,7 +31,7 @@ const Category = () => {
     return (
         <div>
             {categories.map((category, i) => {
-                return <Link type='button' className="btn btn-info mb-4 w-75 py-5" to={`/categories/${category.name.toLowerCase()}`} key={i}>{category.name}</Link>
+                return <Link type='button' className="btn btn-info mb-4 w-75 py-5" to={`/categories/${category.name.toLowerCase().replace(/\s+/g, '')}`} key={i}>{category.name}</Link>
             })}
         </div>
     )

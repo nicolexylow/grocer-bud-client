@@ -9,9 +9,8 @@ import Signup from './pages/Signup'
 import { Login } from './pages/Login'
 import About from './pages/About'
 import Stores from './stores/Stores';
-import Items from './items/Items';
+import {Items} from './items/Items';
 import AddItemForm from './items/AddItemForm'
-
 
 
 function App() {

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
 import NavBar from "../NavBar";
+import { db, storage, storageRef } from "../../config/firebase";
+import { collectionName } from "./Items";
 
 const AddItemForm = ({ collectionName}) => {
   const navigate = useNavigate();
@@ -18,48 +19,47 @@ const AddItemForm = ({ collectionName}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const sendData = async () => {
-      // Fetch nutrition information
-      const query = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${productName}&page_size=1&json=true`;
-      fetch(query)
-        .then((response) => response.json())
-        .then(async (data) => {
-          // Get nutrition information and score for the first product
-          const product = data.products[0];
-          const nutritionFacts = {
-            calories: product.nutriments.energy_value,
-            protein: product.nutriments.proteins_value,
-            fat: product.nutriments.fat_value,
-            carbohydrates: product.nutriments.carbohydrates_value,
-          };
-          const nutritionScore = product.nutrition_grade_fr;
+    // Fetch nutrition information
 
-          const docRef = await addDoc(
-            collection(db, collectionName),
-            {
-              name: productName,
-              imageUrl: image,
-              expiryDate: expiryDate,
-              nutritionFacts: nutritionFacts,
-              nutritionScore: nutritionScore,
-            }
-          );
-      
-          // console.log(docRef);
+    const query = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${productName}&page_size=1&json=true`;
+    fetch(query)
+      .then((response) => response.json())
+      .then(async (data) => {
+        // Get nutrition information and score for the first product
+        const product = data.products[0];
+        const nutritionFacts = {
+          calories: product.nutriments.energy_value,
+          protein: product.nutriments.proteins_value,
+          fat: product.nutriments.fat_value,
+          carbohydrates: product.nutriments.carbohydrates_value,
+        };
+        const nutritionScore = product.nutrition_grade_fr;
+        
 
-          // Navigate to items list
-          navigate(`/categories/${collectionName}/items`);
-        })
-        .catch((error) => {
-          console.error("Error fetching nutrition data:", error);
-        });
-    };
 
-    sendData();
+        const sendData = async () => {
+          console.log(collectionName)
+          const docRef = await addDoc(collection(db, collectionName), {
+            name: productName,
+            imageUrl: image,
+            expiryDate: expiryDate,
+            // nutritionFacts: nutritionFacts,
+            // nutritionScore: nutritionScore,
+          });
+          console.log(docRef);
+        };
+
+        sendData();
+        // Navigate to items list
+        navigate(`/categories`);
+      })
+      .catch((error) => {
+        console.error("Error fetching nutrition data:", error);
+      });
   };
 
   const handleCancel = () => {
-    navigate(`/categories/${collectionName}/items`);
+    navigate(`/categories`);
   };
 
   return (

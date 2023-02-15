@@ -40,8 +40,6 @@ const NavBar = () => {
             useEffect(() => {
               const unsubscribe = auth.onAuthStateChanged((user) => {
                 setUser(user);
-                console.log(user)
-                console.log(auth.uid)
               });
               return () => unsubscribe();
             }, []);
@@ -81,7 +79,6 @@ const NavBar = () => {
                 
             <p>
                 {name ? `Welcome ${name}` : 'You are not logged in.'}
-                {uid ? `Welcome ${uid}` : 'You are not logged in.'}
             </p>
 
         </div>
