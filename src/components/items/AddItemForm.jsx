@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import { storage, storageRef } from "../../config/firebase";
-import { db, storage } from "../../config/firebase";
+import NavBar from "../NavBar";
 
-const AddItemForm = () => {
+const AddItemForm = ({ collectionName}) => {
   const navigate = useNavigate();
-  const { categoryId } = useParams();
   const [productName, setProductName] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [image, setImage] = useState("");
-  // const [imageUrl, setImageUrl] = useState("");
 
   const handleImageUpload = (event) => {
     const image = event.target.value;
@@ -20,60 +17,54 @@ const AddItemForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    // Upload image to Firebase Storage
-    // if (image !== null) {
-    //   const storageRef = storage.ref();
-    //   const imageRef = storageRef.child(image.name);
-    //   await imageRef.put(image);
-    //   const url = await imageRef.getDownloadURL();
-    //   setImageUrl(url);
-    // }
 
-    // Fetch nutrition information
-    const query = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${productName}&page_size=1&json=true`;
-    fetch(query)
-      .then((response) => response.json())
-      .then(async (data) => {
-        // Get nutrition information and score for the first product
-        const product = data.products[0];
-        const nutritionFacts = {
-          calories: product.nutriments.energy_value,
-          protein: product.nutriments.proteins_value,
-          fat: product.nutriments.fat_value,
-          carbohydrates: product.nutriments.carbohydrates_value,
-        };
-        const nutritionScore = product.nutrition_grade_fr;
-        
-        console.log("categoryId:", categoryId);
+    const sendData = async () => {
+      // Fetch nutrition information
+      const query = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${productName}&page_size=1&json=true`;
+      fetch(query)
+        .then((response) => response.json())
+        .then(async (data) => {
+          // Get nutrition information and score for the first product
+          const product = data.products[0];
+          const nutritionFacts = {
+            calories: product.nutriments.energy_value,
+            protein: product.nutriments.proteins_value,
+            fat: product.nutriments.fat_value,
+            carbohydrates: product.nutriments.carbohydrates_value,
+          };
+          const nutritionScore = product.nutrition_grade_fr;
 
-        const sendData = async () => {
-          console.log("categoryId:", categoryId);
-          const docRef = await addDoc(collection(db, `categories`, categoryId ,`items`), {
-            name: productName,
-            imageUrl: image,
-            expiryDate: expiryDate,
-            nutritionFacts: nutritionFacts,
-            nutritionScore: nutritionScore,
-          });
-          console.log(docRef);
-        };
+          const docRef = await addDoc(
+            collection(db, collectionName),
+            {
+              name: productName,
+              imageUrl: image,
+              expiryDate: expiryDate,
+              nutritionFacts: nutritionFacts,
+              nutritionScore: nutritionScore,
+            }
+          );
+      
+          // console.log(docRef);
 
-        sendData();
-        // Navigate to items list
-        navigate("/categories/${categoryId}/items");
-      })
-      .catch((error) => {
-        console.error("Error fetching nutrition data:", error);
-      });
+          // Navigate to items list
+          navigate(`/categories/${collectionName}/items`);
+        })
+        .catch((error) => {
+          console.error("Error fetching nutrition data:", error);
+        });
+    };
+
+    sendData();
   };
 
   const handleCancel = () => {
-    navigate("/categories/${categoryId}/items");
+    navigate(`/categories/${collectionName}/items`);
   };
 
   return (
     <div>
+      <NavBar />
       <h1>Add Item</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -117,4 +108,7 @@ const AddItemForm = () => {
 };
 
 export default AddItemForm;
+
+
+
 
