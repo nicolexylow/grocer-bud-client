@@ -36,7 +36,7 @@ function App() {
           <Route exact path={'/categories/' + testEnd} element={<Items />} />
           <Route path='/items' element={<Items />} />
           <Route path='/AddItemForm' element={<AddItemForm />} />
-          {/* /categories/:categoryId/add-item need something like this not sure how */}
+          <Route path="/categories/:categoryId/items" element={<Items />} />
         </Routes>
       </Router>
       </AuthProvider>
