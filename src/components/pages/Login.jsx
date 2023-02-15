@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import NavBar from '../NavBar'
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+// import { useAuth } from "../../contexts/AuthContext";
 import { signInWithGoogle } from '../../config/firebase';
 import {  signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup   } from 'firebase/auth';
 import { auth } from '../../config/firebase';
@@ -18,14 +18,15 @@ export const Login = () => {
 
     const onLogin = (e) => {
         e.preventDefault();
+        setLoading(true);
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed in 
             const user = userCredential.user;
             navigate("/categories")
             console.log(user);
         })
         .catch((error) => {
+            setLoading(false);
             const errorMessage = error.message;
             setErrorMessage(errorMessage);
         });
@@ -33,11 +34,14 @@ export const Login = () => {
 
     const signInWithGoogle = async () => {
         try {
+          setLoading(true);
           await signInWithPopup(auth, provider);
           navigate("/categories");
         } catch (error) {
+          setLoading(false);
           console.log(error);
         }
+        setLoading(false);
       };
 
     return (
@@ -74,7 +78,7 @@ export const Login = () => {
               </div>
             </div>
             <div>
-              <button type="submit" onClick={onLogin}>
+              <button type="submit" onClick={onLogin} disabled={loading}>
                 Login
               </button>
             </div>

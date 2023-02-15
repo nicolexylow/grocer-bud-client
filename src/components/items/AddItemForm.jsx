@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { storage, storageRef } from "../../config/firebase";
+import { db, storage } from "../../config/firebase";
 
 const AddItemForm = () => {
   const navigate = useNavigate();

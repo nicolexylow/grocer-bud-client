@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import NavBar from '../NavBar';
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from '../../contexts/AuthContext';
+// import { useAuth } from '../../contexts/AuthContext';
 import {  createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../config/firebase';
+import { auth, db } from '../../config/firebase';
+import { collection, doc, setDoc, getDocs, addDoc } from "firebase/firestore"; 
 
 export default function Signup () {
     const [displayName, setDisplayName] = useState("");
@@ -14,28 +15,50 @@ export default function Signup () {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
 
+
+    const validatePassword = () => {
+      let isValid = true
+      if (password !== '' && confirmPassword !== ''){
+        if (password !== confirmPassword) {
+          isValid = false
+          setErrorMessage('Passwords does not match')
+        }
+      }
+      return isValid
+    }
     const onSubmit = async (e) => {
         e.preventDefault()
         
+        
+        if(validatePassword()) {
         try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-        const user = userCredential.user;
+          setLoading(true);
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+          const user = userCredential.user;
 
         await updateProfile(user, {
           displayName: displayName
         });
 
             navigate("/categories")
+
+            await addDoc(collection(db, "users"), {
+              userId: user.uid,
+              displayName,
+              authProvider: "local",
+              email
+          });
+
           }
+        
+
           catch (error) {
               const errorMessage = error.message;
               setErrorMessage(errorMessage);
           };
 
-          if (password !== confirmPassword) {
-            return alert("Passwords do not match");
-          }
-      }
+          setLoading(false);
+      }}
     
     return (
       <div>
@@ -46,7 +69,7 @@ export default function Signup () {
               GrocerBud sign up
             </h2>
           </div>
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
+          <div>{errorMessage}</div>
           <form onSubmit={onSubmit}>
             <div>
             <div>
@@ -89,7 +112,7 @@ export default function Signup () {
               </div>
             </div>
             <div>
-              <button type="submit">
+              <button type="submit" disabled={loading}>
                 Sign up
               </button>
             </div>
