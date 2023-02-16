@@ -1,55 +1,86 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar';
-import { collection, doc, setDoc, getDocs } from "firebase/firestore"; 
 import { db } from '../../config/firebase'
+import { collection, doc, setDoc, addDoc, getDocs, docRef } from "firebase/firestore"; 
 
-const Items = () => {
-  const [items, setItems] = useState([])
-
-  const params = useParams() 
-  console.log(params.name)
+export const Items = () => {
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
+  const [itemAdded, setItemAdded] = useState(false);
+  //const [isLoading, setLoading] = useState(true);
 
   const fetchData = async() => {
-    const querySnapshot = await getDocs(collection(db, params.name));
+    const querySnapshot = await getDocs(collection(db, collectionName));
     const arr = []
     querySnapshot.forEach((doc) => {
-        arr.push(doc.data())
-    });
-    setItems(arr)
-  }
 
+      arr.push(doc.data())
+    });
+    setProducts(arr)
+  }
+  // fetchData();
+  // if (itemAdded) {
   useEffect(() => {
     fetchData();
   }, [])
-}
+//}
+  
+// if(isLoading) {
+//   return <div className='App'>Loading...</div>
+// }
 
-// function Items() {
-//   const [products, setProducts] = useState([]);
-//   const [error, setError] = useState(null);
-//   const [itemAdded, setItemAdded] = useState(false);
+  if (products.length === 0) {
+    return ''
+  }
 
-//   useEffect(() => {
-//     // Fetch products from API only when an item has been added
-//     if (itemAdded) {
-//       fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=&search_countries=&json=1`)
-//         .then(response => {
-//           if (!response.ok) {
-//             throw new Error('Unable to fetch products from API');
-//           }
-//           return response.json();
-//         })
-//         .then(data => {
-//           if (data.products.length === 0) {
-//             throw new Error('No products found for selected category and country');
-//           }
-//           setProducts(data.products);
-//         })
-//         .catch(error => {
-//           setError(error.message);
-//         });
-//     }
-//   }, [itemAdded]);
+  return (
+    <div>
+      <p>hello</p>
+      {/* {console.log(collectionName)} */}
+        {products.map((product, i) => {
+          // {console.log(product)}
+          // return <Link to={`/categories/${product.code}`}>
+          return <div key={i}>
+                <h2>{product.name}</h2>
+                <img src={product.imageUrl} alt={product.name} />
+                <p>Nutrition facts:</p>
+                <ul>
+                  <li>Calories: {product.nutritionFacts?.calories}</li>
+                  <li>Protein: {product.nutritionFacts?.protein} g</li>
+                  <li>Fat: {product.nutritionFacts?.fat} g</li>
+                  <li>Carbohydrates: {product.nutritionFacts?.carbohydrates} g</li>
+                  <li>Nutrition Grade: {product?.nutritionScore}</li>
+                </ul>
+           </div>     
+        })}
+      <Link to="/AddItemForm">
+        <button >Add Item</button>
+        </Link>
+    </div>
+  )
+      }
+//}
+  //   // Fetch products from API only when an item has been added
+  //   if (itemAdded) {
+  //     fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=&search_countries=&json=1`)
+  //       .then(response => {
+  //         if (!response.ok) {
+  //           throw new Error('Unable to fetch products from API');
+  //         }
+  //         return response.json();
+  //       })
+  //       .then(data => {
+  //         if (data.products.length === 0) {
+  //           throw new Error('No products found for selected category');
+  //         }
+  //         setProducts(data.products);
+  //       })
+  //       .catch(error => {
+  //         setError(error.message);
+  //       });
+  //   }
+  // }, [itemAdded]);
 
 //   const handleItemAdded = () => {
 //     setItemAdded(true);
@@ -59,13 +90,11 @@ const Items = () => {
 //     return <div>{error}</div>;
 //   }
 
+//   get_collection_name()
+
 //   return (
 //     <div>
 //       <NavBar />
-//       {items.map((item, i) => {{console.log(items)}
-//           return <p key={i}>{item.name}</p>
-//       })}
-      
 //       <h1>Items Page</h1>
 //       {products.length > 0 ? (
 //         <ul>
@@ -93,85 +122,16 @@ const Items = () => {
 //         <button onClick={handleItemAdded}>Add Item</button>
 //       </Link>
 //     </div>
-    
-//   )
-// }
-
-export default Items;
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-// import NavBar from '../NavBar';
-// import { db } from '../../config/firebase';
-// import { collection, addDoc } from "firebase/firestore"; 
-
-// function Items() {
-//   const [products, setProducts] = useState([]);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     // Initialize Firebase with your project credentials
-//     firebase.initializeApp({
-//       // your Firebase project credentials
-//     });
-
-//     // Create a reference to the Firebase collection that stores items
-//     // const itemsRef = firebase.firestore().collection('breakfast foods');
-//     const itemsRef =  getDocs(collection(db, "breakfast foods"));
-//     // Listen for changes to the items in the collection
-//     const unsubscribe = itemsRef.onSnapshot((snapshot) => {
-//       const newProducts = snapshot.docs.map((doc) => ({
-//         id: doc.id,
-//         ...doc.data(),
-//       }));
-//       setProducts(newProducts);
-//     });
-
-//     // Unsubscribe from the listener when the component unmounts
-//     return unsubscribe;
-//   }, []);
-
-//   const handleItemAdded = () => {
-//     // Create a new item and add it to the Firebase collection
-//     firebase.firestore().collection('breakfast foods').add({
-//       // the data for the new item
-//     });
-//   };
-
-//   if (error) {
-//     return <div>{error}</div>;
-//   }
-
-//   return (
-//     <div>
-//       <NavBar />
-//       <h1>Items Page</h1>
-//       {products.length > 0 ? (
-//         <ul>
-//           {products.map((product) => (
-//             <li key={product.id}>
-//               <Link to={`/item/${product.id}`}>
-//                 <h2>{product.product_name}</h2>
-//                 <img src={product.image_url} alt={product.product_name} />
-//                 <p>Nutrition facts:</p>
-//                 <ul>
-//                   <li>Calories: {product.calories}</li>
-//                   <li>Protein: {product.protein} g</li>
-//                   <li>Fat: {product.fat} g</li>
-//                   <li>Carbohydrates: {product.carbohydrates} g</li>
-//                   <li>Nutrition Grade: {product.nutrition_grade}</li>
-//                 </ul>
-//               </Link>
-//             </li>
-//           ))}
-//         </ul>
-//       ) : (
-//         <div>No items found. Please add a new item.</div>
-//       )}
-//       <button onClick={handleItemAdded}>Add Item</button>
-//     </div>
 //   );
 // }
 
-// export default Items;
+function get_collection_name() {
+  let str = window.location.pathname
+    str = str.split("/");
+    const collection_name = str[str.length - 1];
+    return collection_name
+}
+const collectionName = get_collection_name();
+
+export { collectionName } 
+

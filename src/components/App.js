@@ -9,9 +9,8 @@ import Signup from './pages/Signup'
 import { Login } from './pages/Login'
 import About from './pages/About'
 import Stores from './stores/Stores';
-import Items from './items/Items';
+import {Items} from './items/Items';
 import AddItemForm from './items/AddItemForm'
-
 
 
 function App() {
@@ -38,9 +37,10 @@ function App() {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/stores' element={<Stores />} />
-          <Route path={'/categories/:name'} element={<Items />} />
-          <Route path='/items' element={<Items />} />
+          <Route exact path={'/categories/:name'} element={<Items />} />
+          {/* <Route path='/items' element={<Items />} /> */}
           <Route path='/AddItemForm' element={<AddItemForm />} />
+          {/* <Route path="/categories/:categoryId/items" element={<Items />} /> */}
         </Routes>
       </Router>
       </AuthProvider>

@@ -6,35 +6,10 @@ import { storage } from '../../config/firebase';
 
 const AddCategory = (props) => {
 
-    // https://blog.logrocket.com/firebase-cloud-storage-firebase-v9-react/
-        const [imgUrl, setImgUrl] = useState(null);
-        const [progresspercent, setProgresspercent] = useState(0);
+    const navigate = useNavigate()
 
-        const handleSubmit = (e) => {
-        e.preventDefault()
-        const file = e.target[0]?.files[0]
-
-        if (!file) return;
-
-        const storageRef = ref(storage, `files/${file.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, file);
-
-        uploadTask.on("state_changed",
-        (snapshot) => {
-            const progress =
-            Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-            setProgresspercent(progress);
-        },
-        (error) => {
-            alert(error);
-        },
-        () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setImgUrl(downloadURL)
-            });
-        }
-        );
-        
+    const handleClick = () => {
+        navigate('/categories/new')
     }
 
     const navigate = useNavigate()
@@ -47,15 +22,10 @@ const AddCategory = (props) => {
             <button className='btn btn-success btn-sm mb-5' style={{backgroundColor: '#60954E'}} onClick={handleClick}>Add a category</button>
 
             <div className='categories-container'>
+                <Category />
                 <Category arr={props.arr}/>
             </div>
-          
-          {
-            imgUrl &&
-            <img src={imgUrl} alt='uploaded file' height={200} />
-          }
         </div>
-      );
-    }
-
+    )
+}
 export default AddCategory
