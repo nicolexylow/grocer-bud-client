@@ -30,7 +30,7 @@ const Category = () => {
 
         <div>
             {categories.map((category, i) => {
-                return <Link  to={`/categories/${category.name.toLowerCase()}`} key={i}>
+                return <Link to={`/categories/${category.name.toLowerCase()}`} key={i}>
 
                     <button 
                     className="btn btn-success mb-4 py-5" 

@@ -57,6 +57,7 @@ if (products.length === 0 ) {
             color = '#B5F0AB'
             daysDiffText = `expires in ${daysDiff} days`;
           } else {
+            color = '#FEE093'
             daysDiffText = `expires in ${daysDiff} days`;
           }
           return <div className='d-flex justify-content-center'>

@@ -43,7 +43,7 @@ const AddItemForm = () => {
 
         const sendData = async () => {
     
-          const docRef = await addDoc(collection(db, collectionName), {
+          const docRef = await addDoc(collection(db, name), {
             name: productName,
             imageUrl: image,
             expiryDate: expiryDate,
@@ -54,7 +54,7 @@ const AddItemForm = () => {
 
         sendData();
         // Navigate to items list
-        navigate(`/categories`);
+        navigate(`/categories/${name}`);
       })
       .catch((error) => {
         console.error("Error fetching nutrition data:", error);
