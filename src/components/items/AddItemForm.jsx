@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage, storageRef } from "../../config/firebase";
 import { collectionName } from "./Items";
+import NavBar from "../NavBar";
 
 
 const AddItemForm = () => {
@@ -66,10 +67,11 @@ const AddItemForm = () => {
 
   return (
     <div>
-      <h1>Add Item</h1>
+      <NavBar />
+      <h1 style={{fontSize: '28px', marginTop: '0', marginBottom: '20px'}}>Add Item</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="product-name">Product Name</label>
+        <div className="mb-3">
+          <label style={{marginRight: '10px'}} htmlFor="product-name">Product Name</label>
           <input
             type="text"
             id="product-name"
@@ -78,8 +80,8 @@ const AddItemForm = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="expiry-date">Expiry Date</label>
+        <div className="mb-3">
+          <label style={{marginRight: '10px'}} htmlFor="expiry-date">Expiry Date</label>
           <input
             type="date"
             id="expiry-date"
@@ -88,8 +90,8 @@ const AddItemForm = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="image-upload">Image Upload</label>
+        <div className="mb-3">
+          <label style={{marginRight: '10px'}} htmlFor="image-upload">Image URL</label>
           <input
             type="text"
             id="image-upload"
@@ -98,10 +100,17 @@ const AddItemForm = () => {
           />
         </div>
         <div>
-          <button type="submit">Add Item</button>
-          <button type="button" onClick={handleCancel}>
-            Cancel
-          </button>
+          <div>
+            <button className="btn btn-light btn-sm mb-4" style={{backgroundColor: '#A6D48F', width: '190px'}} type="submit">Add Item</button>
+          </div>
+          
+          <div>
+            <button className="btn btn-success btn-sm" style={{backgroundColor: '#60954E'}} type="button" onClick={handleCancel}>
+              Cancel
+            </button>
+          </div>
+          
+            
         </div>
       </form>
     </div>

@@ -40,17 +40,25 @@ export const Items = () => {
       {}
         {products.map((product, i) => {
           return <div className='d-flex justify-content-center'>
-          <div key={i} className='mb-4' style={{backgroundColor: '#A6D48F', width: '60%', borderRadius: '10px'}}>
-                <h5>{product.name}</h5>
-                <img src={product.imageUrl} alt={product.name} />
-                <p>Nutrition facts:</p>
-                <ul>
-                  <li>Calories: {product.nutritionFacts?.calories}</li>
-                  <li>Protein: {product.nutritionFacts?.protein} g</li>
-                  <li>Fat: {product.nutritionFacts?.fat} g</li>
-                  <li>Carbohydrates: {product.nutritionFacts?.carbohydrates} g</li>
-                  <li>Nutrition Grade: {product?.nutritionScore}</li>
-                </ul>
+          <div key={i} className='mb-4' style={{backgroundColor: '#A6D48F', width: '40%', borderRadius: '10px'}}>
+                <h2 className='my-3 mb-4' style={{fontSize: '20px'}}>{product.name}</h2>
+
+                <div className='d-flex justify-content-around'>
+                  <img src={product.imageUrl} alt={product.name} width={180} className='mb-4' style={{objectFit: 'cover'}}/>
+
+                  <div>
+                    <h3 style={{fontSize: '16px', fontWeight: '600'}}>Nutrition facts</h3>
+                    <ul style={{padding: '0', textAlign: 'left'}}>
+                      <li style={{listStyle: 'none'}}>Calories: {product.nutritionFacts?.calories}</li>
+                      <li style={{listStyle: 'none'}}>Protein: {product.nutritionFacts?.protein} g</li>
+                      <li style={{listStyle: 'none'}}>Fat: {product.nutritionFacts?.fat} g</li>
+                      <li style={{listStyle: 'none'}}>Carbohydrates: {product.nutritionFacts?.carbohydrates} g</li>
+                      <li style={{listStyle: 'none'}}>Nutrition Grade: {product?.nutritionScore}</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                
            </div>  
            </div>   
         })}
