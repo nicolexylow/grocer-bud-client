@@ -37,10 +37,10 @@ function App() {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/grocery-list' element={<GroceryList />} />
           <Route exact path='/stores' element={<Stores />} />
-          <Route path={'/categories/:name'} element={<Items />} />
-          <Route path='/items' element={<Items />} />
+          <Route exact path={'/categories/:name'} element={<Items />} />
+          {/* <Route path='/items' element={<Items />} /> */}
           <Route path='/AddItemForm' element={<AddItemForm />} />
-          <Route path="/categories/:categoryId/items" element={<Items />} />
+          {/* <Route path="/categories/:categoryId/items" element={<Items />} /> */}
         </Routes>
       </Router>
       </AuthProvider>
