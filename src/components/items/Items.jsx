@@ -43,19 +43,29 @@ if (products.length === 0 ) {
           const timeDiff = expiryDate.getTime() - currentDate.getTime();
           const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
           let daysDiffText = '';
+          let color = ''
           if (daysDiff < 0) {
-            daysDiffText = ' is expired';
+            daysDiffText = 'is expired';
+            color = '#FEAEAE'
           } else if (daysDiff === 0) {
             daysDiffText = 'expires today';
+            color = '#FEE093'
           } else if (daysDiff === 1) {
             daysDiffText = 'expires in 1 day';
+            color = '#FEE093'
+          } else if (daysDiff > 5) {
+            color = '#B5F0AB'
+            daysDiffText = `expires in ${daysDiff} days`;
           } else {
-            daysDiffText = `${daysDiff} days`;
+            daysDiffText = `expires in ${daysDiff} days`;
           }
           return <div className='d-flex justify-content-center'>
           <div key={i} className='mb-4' style={{backgroundColor: '#A6D48F', width: '50%', borderRadius: '10px'}}>
-                <h2 className='my-3 mb-4' style={{fontSize: '20px'}}>{product.name}</h2>
-                <h6>{` This item ${daysDiffText}.`}</h6>
+              <div className='d-flex justify-content-between align-items-center mb-3 px-5'>
+              <span className='my-3 mb-4' style={{fontSize: '22px', fontWeight: 'bold'}}>{product.name}</span>
+                <span style={{backgroundColor: `${color}`, padding:'5px', borderRadius: '5px'}}>{` This item ${daysDiffText}.`}</span>
+              </div>
+                
                 <div className='d-flex justify-content-around'>
                   <img src={product.imageUrl} alt={product.name} className='mb-4' style={{objectFit: 'cover', borderRadius: '6px', border: '1px solid black', width: '30%', }}/>
 
