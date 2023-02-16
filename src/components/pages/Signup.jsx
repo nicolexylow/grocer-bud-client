@@ -40,7 +40,7 @@ export default function Signup () {
           displayName: displayName
         });
 
-            navigate("/categories")
+            navigate("/categories/user")
 
             await addDoc(collection(db, "users"), {
               userId: user.uid,
@@ -48,9 +48,7 @@ export default function Signup () {
               authProvider: "local",
               email
           });
-
           }
-        
 
           catch (error) {
               const errorMessage = error.message;

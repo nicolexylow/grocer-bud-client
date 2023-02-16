@@ -98,9 +98,9 @@ const AddItemForm = () => {
           />
         </div>
         <div>
-          <Link to={`/categories/${ name }`}>
+          {/* <Link to={`/categories/${ name }`}> */}
           <button type="submit">Add Item</button>
-          </Link>
+          {/* </Link> */}
           <button type="button" onClick={handleCancel}>
             Cancel
           </button>

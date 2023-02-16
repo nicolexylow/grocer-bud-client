@@ -42,11 +42,21 @@ if (products.length === 0 ) {
           const expiryDate = new Date(expiryDateString);
           const timeDiff = expiryDate.getTime() - currentDate.getTime();
           const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+          let daysDiffText = '';
+          if (daysDiff < 0) {
+            daysDiffText = ' is expired';
+          } else if (daysDiff === 0) {
+            daysDiffText = 'expires today';
+          } else if (daysDiff === 1) {
+            daysDiffText = 'in 1 day';
+          } else {
+            daysDiffText = `${daysDiff} days`;
+          }
           return <div className='d-flex justify-content-center'>
           <div key={i} className='mb-4' style={{backgroundColor: '#A6D48F', width: '50%', borderRadius: '10px'}}>
                 <h5>{product.name}</h5>
                 <img src={product.imageUrl} alt={product.name}  class="rounded" width="200" height="200"/>
-                <h6>{` This item expires in ${daysDiff} days.`}</h6>
+                <h6>{` This item ${daysDiffText}.`}</h6>
                 <p>Nutrition facts:</p>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item" style={{backgroundColor: '#A6D48F'}}>Calories: {product.nutritionFacts?.calories}</li>
