@@ -18,7 +18,6 @@ const AddCategory = (props) => {
             <button className='btn btn-success btn-sm mb-5' style={{backgroundColor: '#60954E'}} onClick={handleClick}>Add a category</button>
 
             <div className='categories-container'>
-                <Category />
                 <Category arr={props.arr}/>
             </div>
         </div>

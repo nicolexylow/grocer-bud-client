@@ -43,11 +43,11 @@ if (products.length === 0 ) {
           const timeDiff = expiryDate.getTime() - currentDate.getTime();
           const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
           return <div className='d-flex justify-content-center'>
-          <div key={i} className='mb-4' style={{backgroundColor: '#A6D48F', width: '40%', borderRadius: '10px'}}>
+          <div key={i} className='mb-4' style={{backgroundColor: '#A6D48F', width: '50%', borderRadius: '10px'}}>
                 <h2 className='my-3 mb-4' style={{fontSize: '20px'}}>{product.name}</h2>
 
                 <div className='d-flex justify-content-around'>
-                  <img src={product.imageUrl} alt={product.name} width={180} className='mb-4' style={{objectFit: 'cover'}}/>
+                  <img src={product.imageUrl} alt={product.name} className='mb-4' style={{objectFit: 'cover', borderRadius: '6px', border: '1px solid black', width: '30%', }}/>
 
                   <div>
                     <h3 style={{fontSize: '16px', fontWeight: '600'}}>Nutrition facts</h3>
