@@ -9,7 +9,9 @@ GrocerBud is an application that helps users keep track of the expiry date of th
   - Database: Firestore
   - Deployed using: Firebase Hosting
 
+## Example use cases
 
+<img src="public/images/category.png" alt="Category Page" width="500">
 ### `npm start`
 
 Runs the app in the development mode.\
