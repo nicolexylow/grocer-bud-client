@@ -2,43 +2,46 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from '../NavBar';
 import { db } from '../../config/firebase'
-import { collection, getDocs } from "firebase/firestore"; 
+import { collection, getDocs, query } from "firebase/firestore"; 
 import { useParams } from 'react-router-dom';
 
 export const Items = () => {
   const { name } = useParams();
   const [products, setProducts] = useState([]);
-  // const [error, setError] = useState(null);
-  // const [itemAdded, setItemAdded] = useState(false);
 
-  const fetchData = async() => {
-    const querySnapshot = await getDocs(collection(db, name));
-    const arr = []
-    querySnapshot.forEach((doc) => {
+const fetchData = async() => {
+  const querySnapshot = await getDocs(collection(db, name));
+  const arr = []
+  querySnapshot.forEach((doc) => {
 
-      arr.push(doc.data())
-    });
-    setProducts(arr)
-  }
+    arr.push(doc.data())
+  });
+  setProducts(arr)
+}
 
-  useEffect(() => {
-    fetchData();
-  }, [name])
+useEffect(() => {
+  fetchData();
+}, [name])
 
-  if (products.length === 0) {
-    return ''
-  }
+if (products.length === 0 ) {
+  return ''
+}
 
   return (
     <div>
       < NavBar />
       <h1 style={{fontSize: '28px', marginTop: '0', marginBottom: '20px'}}>{ name.charAt(0).toUpperCase() + name.slice((name.length - 1) * -1) }</h1>
-      <Link to="/AddItemForm">
+      <Link to={`/${ name }/AddItemForm`}>
         <button className='btn btn-success btn-sm mb-5' style={{backgroundColor: '#60954E'}}>Add Item</button>
       </Link>
-      
+      <p></p>
       {}
-        {products.map((product, i) => {
+      {products.filter(product => product.name).map((product, i) =>{
+          const expiryDateString = product.expiryDate;
+          const currentDate = new Date();
+          const expiryDate = new Date(expiryDateString);
+          const timeDiff = expiryDate.getTime() - currentDate.getTime();
+          const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
           return <div className='d-flex justify-content-center'>
           <div key={i} className='mb-4' style={{backgroundColor: '#A6D48F', width: '40%', borderRadius: '10px'}}>
                 <h2 className='my-3 mb-4' style={{fontSize: '20px'}}>{product.name}</h2>
@@ -64,7 +67,8 @@ export const Items = () => {
         })}
     </div>
   )
-}
+      }
+
 function get_collection_name() {
   let str = window.location.pathname
     str = str.split("/");
@@ -74,4 +78,6 @@ function get_collection_name() {
 const collectionName = get_collection_name();
 
 export { collectionName } 
+
+
 

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage, storageRef } from "../../config/firebase";
 import { collectionName } from "./Items";
 import NavBar from "../NavBar";
-
 
 const AddItemForm = () => {
   const navigate = useNavigate();
@@ -12,6 +11,7 @@ const AddItemForm = () => {
   const [expiryDate, setExpiryDate] = useState("");
   const [image, setImage] = useState("");
   const { name } = useParams();
+  console.log('NAME', name)
   // const [imageUrl, setImageUrl] = useState("");
 
   const handleImageUpload = (event) => {
@@ -43,7 +43,7 @@ const AddItemForm = () => {
 
         const sendData = async () => {
     
-          const docRef = await addDoc(collection(db, name), {
+          const docRef = await addDoc(collection(db, collectionName), {
             name: productName,
             imageUrl: image,
             expiryDate: expiryDate,
