@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom';
 
 export const Items = () => {
   const { name } = useParams();
-  console.log('param is', );
   const [products, setProducts] = useState([]);
   // const [error, setError] = useState(null);
   // const [itemAdded, setItemAdded] = useState(false);
@@ -47,14 +46,15 @@ let currentDate = `${year}-${month}-${day}`;
   return (
     <div>
       < NavBar />
+      <h1 style={{fontSize: '28px', marginTop: '0', marginBottom: '20px'}}>{ name.charAt(0).toUpperCase() + name.slice((name.length - 1) * -1) }</h1>
       <Link to="/AddItemForm">
-        <button >Add Item</button>
+        <button className='btn btn-success btn-sm mb-5' style={{backgroundColor: '#60954E'}}>Add Item</button>
       </Link>
-      <h1>{ name }</h1>
-      <p>Items List</p>
+      
       {}
         {products.map((product, i) => {
-          return <div key={i}>
+          return <div className='d-flex justify-content-center'>
+          <div key={i} className='mb-4' style={{backgroundColor: '#A6D48F', width: '60%', borderRadius: '10px'}}>
                 <h5>{product.name}</h5>
                 <img src={product.imageUrl} alt={product.name} />
                 <h6>{product.expiryDate}</h6>
@@ -67,7 +67,8 @@ let currentDate = `${year}-${month}-${day}`;
                   <li>Carbohydrates: {product.nutritionFacts?.carbohydrates} g</li>
                   <li>Nutrition Grade: {product?.nutritionScore}</li>
                 </ul>
-           </div>     
+           </div>  
+           </div>   
         })}
     </div>
   )
