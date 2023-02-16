@@ -19,6 +19,8 @@ const fetchData = async() => {
   setProducts(arr)
 }
 
+
+
 useEffect(() => {
   fetchData();
 }, [name])
@@ -50,7 +52,7 @@ if (products.length === 0 ) {
           } else if (daysDiff === 1) {
             daysDiffText = 'expires in 1 day';
           } else {
-            daysDiffText = `${daysDiff} days`;
+            daysDiffText = `expires in ${daysDiff} days`;
           }
           return <div className='d-flex justify-content-center'>
           <div key={i} className='mb-4' style={{backgroundColor: '#A6D48F', width: '50%', borderRadius: '10px'}}>
