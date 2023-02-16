@@ -12,10 +12,6 @@ const AddCategory = (props) => {
         navigate('/categories/new')
     }
 
-    const navigate = useNavigate()
-    const handleClick = () => {
-        navigate('/categories')
-    }
 
     return (
         <div>
