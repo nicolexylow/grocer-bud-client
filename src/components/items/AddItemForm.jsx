@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
+import NavBar from "../NavBar";
 import { db, storage, storageRef } from "../../config/firebase";
 import { collectionName } from "./Items";
 
-const AddItemForm = () => {
+const AddItemForm = ({ collectionName}) => {
   const navigate = useNavigate();
-  const { categoryId } = useParams();
   const [productName, setProductName] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [image, setImage] = useState("");
-  // const [imageUrl, setImageUrl] = useState("");
 
   const handleImageUpload = (event) => {
     const image = event.target.value;
@@ -19,15 +18,6 @@ const AddItemForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    // Upload image to Firebase Storage
-    // if (image !== null) {
-    //   const storageRef = storage.ref();
-    //   const imageRef = storageRef.child(image.name);
-    //   await imageRef.put(image);
-    //   const url = await imageRef.getDownloadURL();
-    //   setImageUrl(url);
-    // }
 
     // Fetch nutrition information
 
@@ -74,6 +64,7 @@ const AddItemForm = () => {
 
   return (
     <div>
+      <NavBar />
       <h1>Add Item</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -117,4 +108,7 @@ const AddItemForm = () => {
 };
 
 export default AddItemForm;
+
+
+
 

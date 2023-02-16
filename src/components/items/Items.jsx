@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import NavBar from '../NavBar';
-import { db } from '../../config/firebase';
-import { collection, addDoc, getDocs, docRef } from "firebase/firestore"; 
+import { db } from '../../config/firebase'
+import { collection, doc, setDoc, addDoc, getDocs, docRef } from "firebase/firestore"; 
 
 export const Items = () => {
   const [products, setProducts] = useState([]);
@@ -83,3 +83,4 @@ function get_collection_name() {
 const collectionName = get_collection_name();
 
 export { collectionName } 
+
