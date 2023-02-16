@@ -7,7 +7,6 @@ const GroceryList = () => {
     return (
         <div>
             <NavBar />
-            <AddGrocery />
             <Groceries />
         </div>
     )

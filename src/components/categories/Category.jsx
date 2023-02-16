@@ -30,9 +30,27 @@ const Category = () => {
 
     return (
         <div>
-            {categories.map((category, i) => {
-                return <Link type='button' className="btn btn-info mb-4 w-75 py-5" to={`/categories/${category.name.toLowerCase()}`} key={i}>{category.name}</Link>
-            })}
+            <div>
+                {categories.map((category, i) => {
+                    return <Link  to={`/categories/${category.name.toLowerCase()}`} key={i}>
+
+                        <button 
+                        className="btn btn-success mb-4 py-5" 
+                        style={{width: '60%', 
+                        backgroundColor: '#A6D48F', 
+                        color: 'black', 
+                        fontWeight: 'bold', 
+                        backgroundImage: 'url("https://media.istockphoto.com/id/1084208252/photo/most-common-dairy-products-shot-from-above-on-blue-striped-table.jpg?s=612x612&w=0&k=20&c=3tdzAUUJxDHY2dv3Zh83flxpAmShnhJxri9FS3mdXGQ=")', 
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover'
+                        }}>
+                            <span className="px-4 py-2" style={{backgroundColor: '#A6D48F', borderRadius: '5px', border: '1px solid black'}}>{category.name}</span>
+                        </button>
+                        </Link>
+                })}
+            </div>
+            
         </div>
     )
 }

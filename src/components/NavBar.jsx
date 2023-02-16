@@ -47,44 +47,51 @@ const NavBar = () => {
             }, []);
 
     return (
+
         <div>
-            <NavLink to='/'>
-                Home
-            </NavLink>
-            
-            <NavLink to='/grocery-list'>
-                Grocery List
-            </NavLink>
 
-            <NavLink to='/stores'>
-                Stores
-            </NavLink>
+            {!user ? ('') : (
+                <div className='navbar navbar-dark mb-5 px-4' style={{backgroundColor: '#A6D48F'}}>
 
-            <NavLink to={'/categories'}>
-                Categories
-            </NavLink>
-
-            <NavLink to={'/items/'}>
-                Items
-            </NavLink>
-            {user ? ('') : (<NavLink to='/login'>
-                    Login
-                </NavLink>)} 
-            {user ? ('') : (<NavLink to='/signup'>
-                    Sign Up
-                </NavLink>)} 
-            {user ? (
-                <button onClick={handleLogout}>Sign Out</button>
-                    ) : (
-                    ''
-                    )}
+                <img src="grocerBud.png" alt="GrocerBud Logo" width={200} />
+    
+    
+                <div>
+                    {!user ? ('') : (<NavLink className='px-5' to='/categories' style={{color: 'black', textDecoration: 'none'}}> 
+                        Home
+                    </NavLink>)}
+                    
+                    <NavLink className='px-5' to='/grocery-list' style={{color: 'black', textDecoration: 'none'}}>
+                        Grocery List
+                    </NavLink>
+        
+                    <NavLink className='px-5' to='/stores' style={{color: 'black', textDecoration: 'none'}}>
+                        Stores
+                    </NavLink>
+                </div>
                 
-            <p>
-                {name ? `Welcome ${name}` : 'You are not logged in.'}
-                {uid ? `Welcome ${uid}` : 'You are not logged in.'}
-            </p>
+                
+                    
+                
+               <div>
+                <span className='mx-3'>{name ? `${name}` : ''}</span>
+                
+                    
+    
+                    {user ? (
+                        <button className='btn btn-success btn-sm' style={{backgroundColor: '#60954E'}} onClick={handleLogout}>Sign Out</button>
+                            ) : (
+                            ''
+                            )}
+               </div>
+                
+    
+            </div>
+            )}
 
         </div>
+
+        
     )
 }
 

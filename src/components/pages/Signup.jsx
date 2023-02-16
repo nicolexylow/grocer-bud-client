@@ -61,19 +61,18 @@ export default function Signup () {
       }}
     
     return (
-      <div>
-        <div>
+      <div style={{width: '100vw', height: '100vh'}} className='d-flex justify-content-center align-items-center'>
+        <div className='d-flex justify-content-center align-items-center flex-column'>
           <div>
-          <NavBar/>
-            <h2>
-              GrocerBud sign up
-            </h2>
+            <h1 style={{fontSize: '28px', marginTop: '0', marginBottom: '50px'}}>
+              Create an account
+            </h1>
           </div>
           <div>{errorMessage}</div>
           <form onSubmit={onSubmit}>
             <div>
             <div>
-                <input onChange={(e) => setDisplayName(e.target.value)}
+                <input className='mb-3' onChange={(e) => setDisplayName(e.target.value)}
                   type="text"
                   autoComplete="name"
                   required
@@ -81,7 +80,7 @@ export default function Signup () {
                 />
               </div>
               <div>
-                <input onChange={(e) => setEmail(e.target.value)}
+                <input className='mb-3' onChange={(e) => setEmail(e.target.value)}
                   id="email-address"
                   name="email"
                   type="email"
@@ -91,7 +90,7 @@ export default function Signup () {
                 />
               </div>
               <div>
-                <input onChange={(e) => setPassword(e.target.value)}
+                <input className='mb-3' onChange={(e) => setPassword(e.target.value)}
                   id="password"
                   name="password"
                   type="password"
@@ -101,7 +100,7 @@ export default function Signup () {
                 />
               </div>
               <div>
-                <input onChange={(e) => setConfirmPassword(e.target.value)}
+                <input className='mb-3' onChange={(e) => setConfirmPassword(e.target.value)}
                   id="confirmPassword"
                   name="confirmPassword"
                   type="password"
@@ -112,13 +111,13 @@ export default function Signup () {
               </div>
             </div>
             <div>
-              <button type="submit" disabled={loading}>
+              <button className='btn btn-light btn-sm px-5 mb-5' style={{backgroundColor: '#A6D48F', width: '190px'}} type="submit" disabled={loading}>
                 Sign up
               </button>
             </div>
             <div>
               <div>
-              <p>Already have an account?
+              <p className='mb-3'>Already have an account?
                 <Link to="/login">
                     Login
                 </Link></p>
@@ -126,6 +125,10 @@ export default function Signup () {
               </div>
             </div>
           </form>
+
+          <Link to='/'>
+            <button className='btn btn-success btn-sm' style={{backgroundColor: '#60954E'}} >Back to Login / Signup</button>
+          </Link>
         </div>
       </div>
     );
