@@ -61,10 +61,7 @@ const NavBar = () => {
             <NavLink to={'/categories'}>
                 Categories
             </NavLink>
-
-            <NavLink to={'/items/'}>
-                Items
-            </NavLink>
+            
             {user ? ('') : (<NavLink to='/login'>
                     Login
                 </NavLink>)} 
