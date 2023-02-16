@@ -4,11 +4,13 @@ import { collection, addDoc } from "firebase/firestore";
 import { db, storage, storageRef } from "../../config/firebase";
 import { collectionName } from "./Items";
 
+
 const AddItemForm = () => {
   const navigate = useNavigate();
   const [productName, setProductName] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [image, setImage] = useState("");
+  const { name } = useParams();
   // const [imageUrl, setImageUrl] = useState("");
 
   const handleImageUpload = (event) => {

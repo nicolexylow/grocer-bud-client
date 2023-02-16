@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import NavBar from '../NavBar';
 import { db } from '../../config/firebase'
-import { collection, doc, setDoc, addDoc, getDocs, docRef } from "firebase/firestore"; 
+import { collection, getDocs } from "firebase/firestore"; 
+import { useParams } from 'react-router-dom';
 
 export const Items = () => {
+  const { name } = useParams();
+  console.log('param is', );
   const [products, setProducts] = useState([]);
-  const [error, setError] = useState(null);
-  const [itemAdded, setItemAdded] = useState(false);
-  //const [isLoading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
+  // const [itemAdded, setItemAdded] = useState(false);
 
   const fetchData = async() => {
-    const querySnapshot = await getDocs(collection(db, collectionName));
+    const querySnapshot = await getDocs(collection(db, name));
     const arr = []
     querySnapshot.forEach((doc) => {
 
@@ -19,37 +21,44 @@ export const Items = () => {
     });
     setProducts(arr)
   }
-  // fetchData();
-  // if (itemAdded) {
+
   useEffect(() => {
     fetchData();
-  }, [])
-//}
-  
-// if(isLoading) {
-//   return <div className='App'>Loading...</div>
-// }
+  }, [name])
 
   if (products.length === 0) {
     return ''
   }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  // if (error) {
+  //   return <div>{error}</div>;
+  // }
 
   get_collection_name()
   
+  const date = new Date();
+
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+
+// This arrangement can be altered based on how we want the date's format to appear.
+let currentDate = `${year}-${month}-${day}`;
   return (
     <div>
-      <p>hello</p>
-      {/* {console.log(collectionName)} */}
+      < NavBar />
+      <Link to="/AddItemForm">
+        <button >Add Item</button>
+      </Link>
+      <h1>{ name }</h1>
+      <p>Items List</p>
+      {}
         {products.map((product, i) => {
-          // {console.log(product)}
-          // return <Link to={`/categories/${product.code}`}>
           return <div key={i}>
-                <h2>{product.name}</h2>
+                <h5>{product.name}</h5>
                 <img src={product.imageUrl} alt={product.name} />
+                <h6>{product.expiryDate}</h6>
+                <h6>{currentDate}</h6>
                 <p>Nutrition facts:</p>
                 <ul>
                   <li>Calories: {product.nutritionFacts?.calories}</li>
@@ -60,9 +69,6 @@ export const Items = () => {
                 </ul>
            </div>     
         })}
-      <Link to="/AddItemForm">
-        <button >Add Item</button>
-        </Link>
     </div>
   )
       }
