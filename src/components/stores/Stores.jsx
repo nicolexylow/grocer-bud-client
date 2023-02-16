@@ -52,6 +52,11 @@ const Stores = () => {
             name: 'Milsons Point Supermarket',
             lat: -33.84518954506443,
             lng: 151.21232803659882
+        }, 
+        {
+            name: 'Friendly Grocer & Liquor Store',
+            lat: -33.87164561978309, 
+            lng: 151.21904638777576
         }
     ];
 
