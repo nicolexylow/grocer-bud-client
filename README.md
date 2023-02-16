@@ -19,7 +19,7 @@ GrocerBud is an application that helps users keep track of the expiry date of th
 
 ## Example use cases
 
-<img src="[https://raw.githubusercontent.com/nicolexylow/grocer-bud-client/main/public/grocerBud.png]" alt="Category Page" width="500">
+<img src="https://raw.githubusercontent.com/nicolexylow/grocer-bud-client/main/public/grocerBud.png" alt="Category Page" width="500" />
 
 ## Design 
 
