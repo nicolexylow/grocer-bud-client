@@ -33,7 +33,7 @@ export const Items = () => {
   return (
     <div>
       < NavBar />
-      <Link to="/AddItemForm">
+      <Link to={`/${ name }/AddItemForm`}>
         <button >Add Item</button>
       </Link>
       <h1>{ name }</h1>
