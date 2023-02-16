@@ -1,10 +1,14 @@
-# Getting Started with Create React App
+# GrocerBud
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+GrocerBud is an application that helps users keep track of the expiry date of their grocery items. Users can add any grocery item and GrocerBud will tell them how many days before that item expires. They can then create specific collections to organise their grocery items, add item to a grocery list and view nearby stores on a store locator map.
 
-## Available Scripts
+## Technologies used
 
-In the project directory, you can run:
+  - React v18.2.0
+  - Firebase v9.0
+  - Database: Firestore
+  - Deployed using: Firebase Hosting
+
 
 ### `npm start`
 
