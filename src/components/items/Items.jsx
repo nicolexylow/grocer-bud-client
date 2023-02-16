@@ -7,10 +7,7 @@ import { useParams } from 'react-router-dom';
 
 export const Items = () => {
   const { name } = useParams();
-  console.log('param is', );
   const [products, setProducts] = useState([]);
-  // const [error, setError] = useState(null);
-  // const [itemAdded, setItemAdded] = useState(false);
 
   const fetchData = async() => {
     const querySnapshot = await getDocs(collection(db, name));
@@ -56,13 +53,3 @@ export const Items = () => {
     </div>
   )
 }
-function get_collection_name() {
-  let str = window.location.pathname
-    str = str.split("/");
-    const collection_name = str[str.length - 1];
-    return collection_name
-}
-const collectionName = get_collection_name();
-
-export { collectionName } 
-
