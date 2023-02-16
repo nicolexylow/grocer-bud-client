@@ -48,23 +48,30 @@ if (products.length === 0 ) {
           } else if (daysDiff === 0) {
             daysDiffText = 'expires today';
           } else if (daysDiff === 1) {
-            daysDiffText = 'in 1 day';
+            daysDiffText = 'expires in 1 day';
           } else {
             daysDiffText = `${daysDiff} days`;
           }
           return <div className='d-flex justify-content-center'>
           <div key={i} className='mb-4' style={{backgroundColor: '#A6D48F', width: '50%', borderRadius: '10px'}}>
-                <h5>{product.name}</h5>
-                <img src={product.imageUrl} alt={product.name}  class="rounded" width="200" height="200"/>
+                <h2 className='my-3 mb-4' style={{fontSize: '20px'}}>{product.name}</h2>
                 <h6>{` This item ${daysDiffText}.`}</h6>
-                <p>Nutrition facts:</p>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item" style={{backgroundColor: '#A6D48F'}}>Calories: {product.nutritionFacts?.calories}</li>
-                  <li class="list-group-item" style={{backgroundColor: '#A6D47F'}}>Protein: {product.nutritionFacts?.protein} g</li>
-                  <li class="list-group-item" style={{backgroundColor: '#A6D46F'}}>Fat: {product.nutritionFacts?.fat} g</li>
-                  <li class="list-group-item" style={{backgroundColor: '#A6D45F'}}>Carbohydrates: {product.nutritionFacts?.carbohydrates} g</li>
-                  <li class="list-group-item" style={{backgroundColor: '#A6D34F'}}>Nutrition Grade: {product?.nutritionScore}</li>
-                </ul>
+                <div className='d-flex justify-content-around'>
+                  <img src={product.imageUrl} alt={product.name} className='mb-4' style={{objectFit: 'cover', borderRadius: '6px', border: '1px solid black', width: '30%', }}/>
+
+                  <div>
+                    <h3 style={{fontSize: '16px', fontWeight: '600'}}>Nutrition facts</h3>
+                    <ul style={{padding: '0', textAlign: 'left'}}>
+                      <li style={{listStyle: 'none'}}>Calories: {product.nutritionFacts?.calories}</li>
+                      <li style={{listStyle: 'none'}}>Protein: {product.nutritionFacts?.protein} g</li>
+                      <li style={{listStyle: 'none'}}>Fat: {product.nutritionFacts?.fat} g</li>
+                      <li style={{listStyle: 'none'}}>Carbohydrates: {product.nutritionFacts?.carbohydrates} g</li>
+                      <li style={{listStyle: 'none'}}>Nutrition Grade: {product?.nutritionScore}</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                
            </div>  
            </div>   
         })}
