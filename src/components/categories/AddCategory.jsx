@@ -12,9 +12,10 @@ const AddCategory = (props) => {
         navigate('/categories/new')
     }
 
+
     return (
         <div>
-            <button className='btn btn-info mb-3' onClick={handleClick}>Add a category</button>
+            <button className='btn btn-success btn-sm mb-5' style={{backgroundColor: '#60954E'}} onClick={handleClick}>Add a category</button>
 
             <div className='categories-container'>
                 <Category />

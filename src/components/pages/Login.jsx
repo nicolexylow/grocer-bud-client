@@ -45,15 +45,18 @@ export const Login = () => {
       };
 
     return (
-        <div>
-        <div>
+        <div style={{width: '100vw', height: '100vh'}} className='d-flex justify-content-center align-items-center'>
+
+        <div className='d-flex justify-content-center align-items-center flex-column'>
           <div>
-          <NavBar/>
-            <h2>
+            <h1 style={{fontSize: '28px', marginTop: '0', marginBottom: '50px'}}>
               Login to your account
-            </h2>
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
+            </h1>
+
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
           </div>
+
+
           <form>
             <div>
               <div>
@@ -64,6 +67,7 @@ export const Login = () => {
                   autoComplete="email"
                   required
                   placeholder="Email address"
+                  className='mb-3'
                 />
               </div>
               <div>
@@ -74,26 +78,32 @@ export const Login = () => {
                   autoComplete="current-password"
                   required
                   placeholder="Password"
+                  className='mb-3'
                 />
               </div>
             </div>
             <div>
-              <button type="submit" onClick={onLogin} disabled={loading}>
+              <button className='btn btn-light btn-sm mb-3' style={{backgroundColor: '#A6D48F', width: '190px'}} type="submit" onClick={onLogin} disabled={loading}>
                 Login
               </button>
             </div>
             <div className="App">
-                <button onClick={signInWithGoogle}>
+                <button onClick={signInWithGoogle} className='btn btn-light btn-sm mb-5' style={{backgroundColor: '#A6D48F'}}>
                     Sign in with Google
                 </button>
             </div>
               <div>
-              <p>Don't have an account?
+              <p className='mb-3'>Don't have an account? 
               <Link to="/signup">
                 Sign up
               </Link></p>  
             </div>
           </form>
+
+          <Link to='/'>
+            <button className='btn btn-success btn-sm' style={{backgroundColor: '#60954E'}} >Back to Login / Signup</button>
+          </Link>
+          
         </div>
       </div>
     );

@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import NavBar from '../NavBar';
 import { db } from '../../config/firebase'
 import { collection, getDocs } from "firebase/firestore"; 
+import { useParams } from 'react-router-dom';
 
 export const Items = () => {
+  const { name } = useParams();
+  console.log('param is', );
   const [products, setProducts] = useState([]);
   // const [error, setError] = useState(null);
   // const [itemAdded, setItemAdded] = useState(false);
 
   const fetchData = async() => {
-    const querySnapshot = await getDocs(collection(db, collectionName));
+    const querySnapshot = await getDocs(collection(db, name));
     const arr = []
     querySnapshot.forEach((doc) => {
 
@@ -21,7 +24,7 @@ export const Items = () => {
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, [name])
 
   if (products.length === 0) {
     return ''
@@ -33,7 +36,7 @@ export const Items = () => {
       <Link to="/AddItemForm">
         <button >Add Item</button>
       </Link>
-      <h1>{collectionName}</h1>
+      <h1>{ name }</h1>
       <p>Items List</p>
       {}
         {products.map((product, i) => {
