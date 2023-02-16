@@ -51,8 +51,7 @@ const NavBar = () => {
             {!user ? ('') : (
                 <div className='navbar navbar-dark mb-5 px-4' style={{backgroundColor: '#A6D48F'}}>
 
-                <img src="grocerBud.png" alt="GrocerBud Logo" width={200} />
-    
+                <img src="../grocerBud.png" alt="GrocerBud Logo" width={200} />
     
                 <div>
                     {!user ? ('') : (<NavLink className='px-5' to='/categories' style={{color: 'black', textDecoration: 'none'}}> 

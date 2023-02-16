@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
-import NavBar from "../NavBar";
+import NavBar from '../NavBar'
 import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import { db } from '../../config/firebase'
 
@@ -46,21 +46,28 @@ const CategoriesForm = (props) => {
     return (
         <div>   
             <NavBar />
-            <h1>NEW CATEGORY</h1>
+            <h1 style={{fontSize: '28px', marginTop: '0', marginBottom: '30px'}}>New Category</h1>
 
             <form onSubmit={handleSubmit}>
-                <label>
-                    Name
-                    <input required onChange={(event) => {setName(event.target.value)}}/>
-                </label>
 
+                <div>
                 <label>
-                    Image URL
-                    <input required onChange={(event) => {setImageURL(event.target.value)}}/>
+                    <input className="mb-3" placeholder="Name" required onChange={(event) => {setName(event.target.value)}}/>
                 </label>
+                </div>
+                
+                <div>
+                <label>
+                    <input className="mb-3" placeholder='Image URL' required onChange={(event) => {setImageURL(event.target.value)}}/>
+                </label>
+                </div>
+                
 
-                <button>Create Category</button>
-                <button type="button" onClick={handleCancel}>Cancel</button>
+                <div>
+                    <button className="btn btn-light btn-sm mb-4" style={{backgroundColor: '#A6D48F', width: '190px'}}>Create Category</button>
+                </div>
+                
+                <button type="button" className="btn btn-success btn-sm" style={{backgroundColor: '#60954E'}} onClick={handleCancel}>Cancel</button>
             </form>
         </div>
     )
