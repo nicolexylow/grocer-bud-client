@@ -58,7 +58,7 @@ const NavBar = () => {
                         Home
                     </NavLink>)}
                     
-                    <NavLink className='px-5' to='/grocery-list' style={{color: 'black', textDecoration: 'none'}}>
+                    <NavLink className='px-5' to='/groceryList' style={{color: 'black', textDecoration: 'none'}}>
                         Grocery List
                     </NavLink>
         
