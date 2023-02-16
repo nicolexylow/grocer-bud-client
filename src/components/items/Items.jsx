@@ -40,7 +40,7 @@ export const Items = () => {
   }
 
   get_collection_name()
-
+  
   return (
     <div>
       <NavBar />
