@@ -9,9 +9,21 @@ GrocerBud is an application that helps users keep track of the expiry date of th
   - Database: Firestore
   - Deployed using: Firebase Hosting
 
+## How to use/navigate Grocerbud
+
+1. Sign up using either the email form or just use your google account
+2. Upon signing up, you are prompted to the categories page
+3. Add a category of your needd with a name and image
+4. Click into the newly made category
+5. Add an item within the category, which 
+
 ## Example use cases
 
-<img src="[./public/images/category.png](https://raw.githubusercontent.com/nicolexylow/grocer-bud-client/main/public/grocerBud.png]" alt="Category Page" width="500">
+<img src="[https://raw.githubusercontent.com/nicolexylow/grocer-bud-client/main/public/grocerBud.png]" alt="Category Page" width="500">
+
+## Design 
+
+## 
 ### `npm start`
 
 Runs the app in the development mode.\
