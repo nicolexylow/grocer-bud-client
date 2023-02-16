@@ -39,7 +39,7 @@ function App() {
           <Route exact path='/stores' element={<Stores />} />
           <Route exact path={'/categories/:name'} element={<Items />} />
           {/* <Route path='/items' element={<Items />} /> */}
-          <Route path='/AddItemForm' element={<AddItemForm />} />
+          <Route path='/:name/AddItemForm' element={<AddItemForm />} />
           {/* <Route path="/categories/:categoryId/items" element={<Items />} /> */}
         </Routes>
       </Router>

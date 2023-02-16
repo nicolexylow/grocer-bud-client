@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage, storageRef } from "../../config/firebase";
 import { collectionName } from "./Items";
-
 
 const AddItemForm = () => {
   const navigate = useNavigate();
@@ -11,6 +10,7 @@ const AddItemForm = () => {
   const [expiryDate, setExpiryDate] = useState("");
   const [image, setImage] = useState("");
   const { name } = useParams();
+  console.log('NAME', name)
   // const [imageUrl, setImageUrl] = useState("");
 
   const handleImageUpload = (event) => {
@@ -98,7 +98,9 @@ const AddItemForm = () => {
           />
         </div>
         <div>
+          <Link to={`/categories/${ name }`}>
           <button type="submit">Add Item</button>
+          </Link>
           <button type="button" onClick={handleCancel}>
             Cancel
           </button>

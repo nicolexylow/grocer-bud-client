@@ -31,7 +31,7 @@ if (products.length === 0 ) {
     <div>
       < NavBar />
       <h1 style={{fontSize: '28px', marginTop: '0', marginBottom: '20px'}}>{ name.charAt(0).toUpperCase() + name.slice((name.length - 1) * -1) }</h1>
-      <Link to="/AddItemForm">
+      <Link to={`/${ name }/AddItemForm`}>
         <button className='btn btn-success btn-sm mb-5' style={{backgroundColor: '#60954E'}}>Add Item</button>
       </Link>
       <p></p>
