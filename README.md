@@ -15,7 +15,8 @@ GrocerBud is an application that helps users keep track of the expiry date of th
 2. Upon signing up, you are prompted to the categories page
 3. Add a category of your needd with a name and image
 4. Click into the newly made category
-5. Add an item within the category, which 
+5. Add an item within the category, which has an input of image, name, expiry date
+6. Watch the magic happen 
 
 ## Example use cases
 
