@@ -62,7 +62,7 @@ const AddItemForm = () => {
   };
 
   const handleCancel = () => {
-    navigate(`/categories`);
+    navigate(`/categories/${name}`);
   };
 
   return (
