@@ -58,7 +58,7 @@ const CategoriesForm = (props) => {
                 
                 <div>
                 <label>
-                    <input className="mb-3" placeholder='Image URL' required onChange={(event) => {setImageURL(event.target.value)}}/>
+                    <input className="mb-3" placeholder='Image URL' onChange={(event) => {setImageURL(event.target.value)}}/>
                 </label>
                 </div>
                 

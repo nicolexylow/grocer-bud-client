@@ -46,6 +46,8 @@ const Category = () => {
                         <span className="px-4 py-2" style={{backgroundColor: '#A6D48F', borderRadius: '5px', border: '1px solid black'}}>{category.name}</span>
                     </button>
                     </Link>
+
+                
             })}
         </div>
 

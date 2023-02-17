@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar';
 import { db } from '../../config/firebase'
-import { collection, getDocs, query } from "firebase/firestore"; 
+import { collection, getDocs, query, deleteDoc, doc } from "firebase/firestore"; 
 import { useParams } from 'react-router-dom';
 
 export const Items = () => {
@@ -13,17 +13,25 @@ const fetchData = async() => {
   const querySnapshot = await getDocs(collection(db, name));
   const arr = []
   querySnapshot.forEach((doc) => {
-
-    arr.push(doc.data())
+    const data = doc.data()
+    data.id = doc.id
+    arr.push(data)
   });
   setProducts(arr)
 }
 
-
-
 useEffect(() => {
   fetchData();
 }, [name])
+
+const deleteData = async (itemId) => {
+  await deleteDoc(doc(db, name, itemId))
+}
+
+const handleDelete = (itemId) => {
+    deleteData(itemId)
+    fetchData()
+}
 
 if (products.length === 0 ) {
   return ''
@@ -33,12 +41,14 @@ if (products.length === 0 ) {
     <div>
       < NavBar />
       <h1 style={{fontSize: '28px', marginTop: '0', marginBottom: '20px'}}>{ name.charAt(0).toUpperCase() + name.slice((name.length - 1) * -1) }</h1>
+      
       <Link to={`/${ name }/AddItemForm`}>
-        <button className='btn btn-success btn-sm mb-5' style={{backgroundColor: '#60954E'}}>Add Item</button>
+        <button className='btn btn-success btn-sm mb-4' style={{backgroundColor: '#60954E'}}>Add Item</button>
       </Link>
       <p></p>
       {}
       {products.filter(product => product.name).map((product, i) =>{
+
           const expiryDateString = product.expiryDate;
           const currentDate = new Date();
           const expiryDate = new Date(expiryDateString);
@@ -70,7 +80,7 @@ if (products.length === 0 ) {
               </div>
                 
                 <div className='d-flex justify-content-around'>
-                  <img src={product.imageUrl} alt={product.name} className='mb-4' style={{objectFit: 'cover', borderRadius: '6px', border: '1px solid black', width: '30%', }}/>
+                  <img src={product.imageUrl} alt={product.name} className='mb-4' style={{objectFit: 'cover', borderRadius: '6px', border: '1px solid black', width: '30%', height: '150px' }}/>
 
                   <div>
                     <h3 style={{fontSize: '16px', fontWeight: '600'}}>Nutrition facts</h3>
@@ -84,8 +94,10 @@ if (products.length === 0 ) {
                   </div>
                 </div>
                 
-                
+                <button className='btn btn-success btn-sm mt-2 mb-3' style={{backgroundColor: '#60954E'}} onClick={() => handleDelete(product.id)}>Delete</button>
            </div>  
+
+           
            </div>   
         })}
     </div>
