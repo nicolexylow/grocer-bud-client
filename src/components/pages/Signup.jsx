@@ -40,7 +40,7 @@ export default function Signup () {
           displayName: displayName
         });
 
-            navigate("/categories/user")
+            navigate("/categories")
 
             await addDoc(collection(db, "users"), {
               userId: user.uid,
