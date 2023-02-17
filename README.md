@@ -24,8 +24,10 @@ GrocerBud is an application that helps users keep track of the expiry date of th
 <img src="https://github.com/nicolexylow/grocer-bud-client/blob/main/public/images/items.png" alt="Items List Page" width="500" />
 <img src="https://github.com/nicolexylow/grocer-bud-client/blob/main/public/images/stores.png" alt="Stores Page" width="500" />
 
-
 ## Design 
+
+<img src="https://github.com/nicolexylow/grocer-bud-client/blob/main/public/images/GrocerBudfigma.png" alt="Figma Design" width="500" />
+
 
 ## 
 ### `npm start`
