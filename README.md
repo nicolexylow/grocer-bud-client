@@ -15,17 +15,20 @@ GrocerBud is an application that helps users keep track of the expiry date of th
 2. Upon signing up, you are prompted to the categories page
 3. Add a category of your needd with a name and image
 4. Click into the newly made category
-5. Add an item within the category, which 
+5. Add an item within the category, which has an input of image, name, expiry date
+6. Watch the magic happen 
 
 ## Example use cases
 
 <img src="https://github.com/nicolexylow/grocer-bud-client/blob/main/public/images/category.png" alt="Category Page" width="500" />
-<img src="https://github.com/nicolexylow/grocer-bud-client/blob/main/public/images/grocerlist.png" alt="Grocery List Page" width="500" />
+<img src="https://github.com/nicolexylow/grocer-bud-client/blob/main/public/images/grocerylist.png" alt="Grocery List Page" width="500" />
 <img src="https://github.com/nicolexylow/grocer-bud-client/blob/main/public/images/items.png" alt="Items List Page" width="500" />
 <img src="https://github.com/nicolexylow/grocer-bud-client/blob/main/public/images/stores.png" alt="Stores Page" width="500" />
 
-
 ## Design 
+
+<img src="https://github.com/nicolexylow/grocer-bud-client/blob/main/public/images/GrocerBudfigma.png" alt="Figma Design" width="500" />
+
 
 ## 
 ### `npm start`
