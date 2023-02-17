@@ -33,7 +33,7 @@ const Category = () => {
                 return <Link to={`/categories/${category.name.toLowerCase()}`} key={i}>
 
                     <button 
-                    className="btn btn-success mb-4 py-5" 
+                    className="btn btn-success mb-5 py-5" 
                     style={{width: '60%', 
                     backgroundColor: '#A6D48F', 
                     color: 'black', 
