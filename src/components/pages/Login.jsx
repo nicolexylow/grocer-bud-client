@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithGoogle } from '../../config/firebase';
 import {  signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup   } from 'firebase/auth';
 import { auth } from '../../config/firebase';
+import { FcGoogle } from 'react-icons/fc'
 
 
 export const Login = () => {
@@ -89,7 +90,11 @@ export const Login = () => {
             </div>
             <div className="App">
                 <button onClick={signInWithGoogle} className='btn btn-light btn-sm mb-5' style={{backgroundColor: '#A6D48F'}}>
+                    <FcGoogle className='mx-1'></FcGoogle>
+                    <span className='mx-1'>
                     Sign in with Google
+                    </span>
+
                 </button>
             </div>
               <div>
