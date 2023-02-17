@@ -1,6 +1,6 @@
 # GrocerBud
 
-[GrocerBud](https://grocerbud.web.app//) is an application that helps users keep track of the expiry date of their grocery items. Users can add any grocery item and GrocerBud will tell them how many days before that item expires. Users can then create specific collections to organise their grocery items, add items to a grocery list and view nearby stores on a store locator map.
+[GrocerBud](https://grocerbud.web.app/) is an application that helps users keep track of the expiry date of their grocery items. Users can add any grocery item and GrocerBud will tell them how many days before that item expires. Users can then create specific collections to organise their grocery items, add items to a grocery list and view nearby stores on a store locator map.
 
 ## Technologies used
 
