@@ -70,7 +70,7 @@ const Stores = () => {
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyD8ndHvcaGNP42biLT_mY6zxMREoK_Nnko"
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API
     })
 
     const handleClick = (marker) => {
